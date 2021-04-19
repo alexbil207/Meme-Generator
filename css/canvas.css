@@ -7,7 +7,7 @@
     height: 80vh;
     /* height Will defined by elements inside */
     width: 100%;
-    transform: translateY(-150%);
+    transform: translateY(-250%);
     transition: transform .3s;
     z-index: 0;
 }

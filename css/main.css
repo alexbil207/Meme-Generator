@@ -8,11 +8,6 @@
 @import url("canvas.css");
 /*#### LAYOUT ####*/
 
-/* .container {
-    max-width: 1100px;
-    margin: 0 auto;
-} */
-
 .btn {
     cursor: pointer;
     background-color: #150e56;
