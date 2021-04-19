@@ -117,15 +117,15 @@ function onFilterMenuBtn() {
 }
 
 
-function toggleMenu(element, textOpen, textClose, elMenu) {
-    if (element.classList.value.includes('hidden')) {
-        element.classList.remove('hidden');
-        element.innerText = textClose;
+function toggleMenu(currElement, textOpen, textClose, elMenu) {
+    if (currElement.classList.value.includes('hidden')) {
+        currElement.classList.remove('hidden');
+        currElement.innerText = textClose;
         showHidden(elMenu);
     }
     else {
-        element.classList.add('hidden');
-        element.innerText = textOpen;
+        currElement.classList.add('hidden');
+        currElement.innerText = textOpen;
         hide(elMenu);
     }
 }

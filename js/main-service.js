@@ -16,9 +16,12 @@ function getImages(filter) {
         images = gImages.filter(image => { return image.category.includes(filter) })
     }
     isPageNav = images.length > PAGE_SIZE;
-    gImagesNum = images.length;
-    let startIdx = gPageIdx * PAGE_SIZE;
-    return images.slice(startIdx, startIdx + PAGE_SIZE);
+    if (isPageNav) {
+        gImagesNum = images.length;
+        let startIdx = gPageIdx * PAGE_SIZE;
+        return images.slice(startIdx, startIdx + PAGE_SIZE);
+    }
+    return images;
 }
 
 function filtersCollect() {
