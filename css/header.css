@@ -60,7 +60,7 @@
         height: 30vh;
         width: 40%;
         border: 1px solid #ebebeb;
-        transform: translateX(150%);
+        transform: translateY(150%);
         transition: transform .6s;
         z-index: 3;
     }
