@@ -1,5 +1,6 @@
 'use strict';
 let gFilter;
+let gInput = '';
 
 window.addEventListener('load', onInit);
 
@@ -18,6 +19,7 @@ function addEventLiseners() {
     document.querySelector('.my-memes-btn').addEventListener('click', onMyMemes);
     document.querySelector('.toggle-menu-btn').addEventListener('click', onMenuBtn);
     document.querySelector('.filter-menu-btn').addEventListener('click', onFilterMenuBtn);
+    document.querySelector('input[id="search"]').addEventListener('input', onSearchInput, this);
     filterEvents();
     imagesEvents();
 }
@@ -132,4 +134,15 @@ function toggleMenu(currElement, textOpen, textClose, elMenu) {
         currElement.innerText = textOpen;
         hide(elMenu);
     }
+}
+
+function onSearchInput(input) {
+    if (input.data) {
+        gInput += input.data;
+        renderImages(gInput);
+    } else {
+        gInput = '';
+        renderImages();
+    }
+
 }

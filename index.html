@@ -26,7 +26,14 @@
     </div>
 </header>
 <section class="filter flex container align-center space-between">
-    <label class="flex" for="search"><input id="search" type="text" placeholder="Search">🔍</label>
+    <label class="flex" for="search"><input id="search" type="text" placeholder="Search" list="suggestions">🔍</label>
+    <datalist id="suggestions">
+        <option value="funny">
+        <option value="sport">
+        <option value="politic">
+        <option value="movie">
+        <option value="game">
+    </datalist>
     <div class="filter-list flex space-between align-center"></div>
     <button class=" filter-menu-btn btn hidden">Filters</button>
 
