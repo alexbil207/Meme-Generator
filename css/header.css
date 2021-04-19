@@ -12,6 +12,7 @@
     flex-grow: 2;
     text-shadow: #1b1b1b 2px 2px 1px;
     margin-inline-start: 10px;
+    margin-bottom: 0.5em;
 }
 
 .logo::before {
@@ -36,4 +37,37 @@
 
 .nav-btns>:last-child {
     border-right: 1px solid #000;
+}
+
+.toggle-menu-btn {
+    position: relative;
+    top: 0;
+    right: 0;
+    outline: none;
+    font-size: 3em;
+    width: 2em;
+}
+
+@media (max-width: 768px) {
+    .toggle-menu-btn {
+        display: block;
+    }
+    .nav-btns {
+        flex-direction: column;
+        position: fixed;
+        right: 0;
+        top: 5.625rem;
+        height: 30vh;
+        width: 40%;
+        border: 1px solid #ebebeb;
+        transform: translateX(150%);
+        transition: transform .6s;
+        z-index: 3;
+    }
+    .nav-btns>*:not(:last-child) {
+        border-bottom: 1px solid #000;
+    }
+    .nav-btns>* {
+        width: 100%;
+    }
 }

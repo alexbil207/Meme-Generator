@@ -27,3 +27,7 @@
 .btn:hover {
     box-shadow: inset 2px 2px 5px 0px #000000
 }
+
+.show {
+    transform: translateX(0);
+}

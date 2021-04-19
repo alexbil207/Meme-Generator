@@ -1,16 +1,13 @@
 /*#### Canvas Modal ####*/
 
-.canvas {
+.canvas-editor {
     position: absolute;
     top: 100px;
     background-color: #fff;
     height: 80vh;
+    /* height Will defined by elements inside */
     width: 100%;
     transform: translateX(-150%);
-    transition: transform .6s;
-    z-index: 1;
-}
-
-.show {
-    transform: translateX(0);
+    transition: transform .3s;
+    z-index: 0;
 }

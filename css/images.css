@@ -1,18 +1,5 @@
 /*#### Main images ####*/
 
-.filter label {
-    flex-grow: 1;
-    font-size: 1.5rem;
-}
-
-.filter-list {
-    flex-grow: 2;
-}
-
-.filter {
-    padding: 0 4px;
-}
-
 .main-content {
     margin: 0 auto;
     min-height: 31.25rem;

@@ -16,10 +16,20 @@ function addEventLiseners() {
     document.querySelector('.next-page').addEventListener('click', onNextPage);
     document.querySelector('.gallery-btn').addEventListener('click', onGalleryBtn);
     document.querySelector('.my-memes-btn').addEventListener('click', onMyMemes);
+    document.querySelector('.toggle-menu-btn').addEventListener('click', onMenuBtn);
+    document.querySelector('.filter-menu-btn').addEventListener('click', onFilterMenuBtn);
+    filterEvents();
+    imagesEvents();
+}
+
+function filterEvents() {
     let elFilterBtns = document.querySelectorAll('.filter-btn');
     elFilterBtns.forEach(btn => { btn.addEventListener('click', onFilerBtn, this); })
+}
+
+function imagesEvents() {
     let elImages = document.querySelectorAll('.card-img');
-    elImages.forEach(image => { image.addEventListener('click', onimageBtn, this); })
+    elImages.forEach(image => { image.addEventListener('click', onImageBtn, this); })
 }
 
 function renderFilters() {
@@ -45,6 +55,7 @@ function renderImages(filter = 'all') {
     }).join('')
     document.querySelector('.image-grid').innerHTML = imagesStr;
     pageCountDisplay();
+    imagesEvents();
 }
 
 function renderSavedMames() {
@@ -64,7 +75,7 @@ function onBackPage() {
 }
 
 function onGalleryBtn() {
-    document.querySelector('.canvas').classList.remove('show');
+    hide(document.querySelector('.canvas-editor'))
     onInit();
 }
 
@@ -88,8 +99,33 @@ function pageCountDisplay() {
     else document.querySelector('.pages').classList.remove('hidden');
 }
 
-function onimageBtn(image) {
+function onImageBtn(image) {
     console.log(image.target.dataset.id);
-    document.querySelector('.canvas').classList.add('show');
+    showHidden(document.querySelector('.canvas-editor'))
 }
 
+function onMenuBtn() {
+    let menuBtn = document.querySelector('.toggle-menu-btn');
+    let elMenu = document.querySelector('.nav-btns');
+    toggleMenu(menuBtn, '☰', '✖', elMenu)
+}
+
+function onFilterMenuBtn() {
+    let menuBtn = document.querySelector('.filter-menu-btn');
+    let elMenu = document.querySelector('.filter-list');
+    toggleMenu(menuBtn, 'Filters', '✖', elMenu)
+}
+
+
+function toggleMenu(element, textOpen, textClose, elMenu) {
+    if (element.classList.value.includes('hidden')) {
+        element.classList.remove('hidden');
+        element.innerText = textClose;
+        showHidden(elMenu);
+    }
+    else {
+        element.classList.add('hidden');
+        element.innerText = textOpen;
+        hide(elMenu);
+    }
+}

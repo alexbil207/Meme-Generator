@@ -11,6 +11,14 @@ function makeId(length = 10) {
     return txt;
 }
 
+function showHidden(element) {
+    element.classList.add('show');
+}
+function hide(element) {
+    element.classList.remove('show');
+}
+
+
 function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);

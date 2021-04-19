@@ -12,7 +12,9 @@
     <link rel="stylesheet" href="./css/main.css">
 
 </head>
-<aside class="canvas"></aside>
+<aside class="canvas-editor">
+    <button class="close-editor"></button>
+</aside>
 <header class="main-header">
     <div class="main-nav container flex space-between">
         <div class="logo align-center">Mem\Gen</div>
@@ -20,11 +22,14 @@
             <div class="btn gallery-btn flex justify-center align-center">Gallery</div>
             <div class="btn my-memes-btn flex justify-center align-center">My Memes</div>
         </div>
+        <button class="toggle-menu-btn btn hidden">☰</button>
     </div>
 </header>
 <section class="filter flex container align-center space-between">
     <label class="flex" for="search"><input id="search" type="text" placeholder="Search">🔍</label>
     <div class="filter-list flex space-between align-center"></div>
+    <button class=" filter-menu-btn btn hidden">Filters</button>
+
 </section>
 <main class="main-content container">
     <div class="image-grid  grid">
@@ -46,6 +51,7 @@
 <script src="./js/util-service.js"></script>
 <script src="./js/image-data-service.js"></script>
 <script src="./js/storage-service.js"></script>
+<script src="./js/editor-service.js"></script>
 <script src="./js/main-service.js"></script>
 <script src="./js/main-controller.js"></script>
 
