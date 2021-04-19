@@ -84,9 +84,14 @@ function onMyMemes() {
 }
 
 function onFilerBtn(btn) {
+    let elMenu = document.querySelector('.filter-list');
+    let menuBtn = document.querySelector('.filter-menu-btn');
+
+    if (elMenu.classList.value.includes('show')) toggleMenu(menuBtn, 'Filters', '✖', elMenu);
     let filter = btn.target.dataset.value;
     gFilter = filter;
     renderImages(filter)
+
 }
 
 function onPageNumUpdate() {
@@ -115,7 +120,6 @@ function onFilterMenuBtn() {
     let elMenu = document.querySelector('.filter-list');
     toggleMenu(menuBtn, 'Filters', '✖', elMenu)
 }
-
 
 function toggleMenu(currElement, textOpen, textClose, elMenu) {
     if (currElement.classList.value.includes('hidden')) {

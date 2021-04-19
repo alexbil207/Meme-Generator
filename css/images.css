@@ -2,12 +2,16 @@
 
 .main-content {
     margin: 0 auto;
-    min-height: 31.25rem;
+    min-height: 80vh;
 }
 
 .image-grid {
     grid-template-columns: repeat(auto-fill, minmax(9.375em, 1fr));
     gap: .937em;
+}
+
+.image-grid, .prev-page, .next-page, .num-pages {
+    margin-bottom: 20px;
 }
 
 .img-preview {
@@ -29,7 +33,6 @@
 }
 
 .prev-page, .next-page, .num-pages {
-    margin: 20px 0;
     text-align: center;
     font-size: 1.2rem;
     padding: 0 10px;
