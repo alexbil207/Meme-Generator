@@ -1,0 +1,21 @@
+/*#### FONTS ####*/
+
+@font-face {
+    font-family: Open_Sans;
+    src: url(../fonts/Open_Sans/OpenSans-Regular.ttf);
+}
+
+@font-face {
+    font-family: Raleway;
+    src: url(../fonts/Raleway/static/Raleway-Regular.ttf);
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url(../fonts/Roboto/Roboto-Regular.ttf);
+}
+
+@font-face {
+    font-family: HashedBrowns;
+    src: url(../fonts/hashed-browns/HashedBrowns-WyJgn.ttf);
+}

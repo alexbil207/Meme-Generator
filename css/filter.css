@@ -1,0 +1,15 @@
+/*#### Filter ####*/
+
+.filter-btn {
+    margin: 0.5em 0;
+    height: 2.5rem;
+    border-left: #fff 1px solid;
+    font-family: Open_Sans, sans-serif;
+    flex-basis: 50%;
+    flex-wrap: wrap;
+}
+
+.currFilterBtn {
+    border-bottom: 3px solid #ca5cd6;
+    color: #ca5cd6;
+}

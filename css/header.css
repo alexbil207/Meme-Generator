@@ -1,0 +1,39 @@
+/*#### header ####*/
+
+.main-header {
+    border-bottom: 5px solid #463ab4;
+}
+
+.logo {
+    font-family: HashedBrowns, sans-serif;
+    text-transform: uppercase;
+    font-size: 2rem;
+    font-weight: 400;
+    flex-grow: 2;
+    text-shadow: #1b1b1b 2px 2px 1px;
+    margin-inline-start: 10px;
+}
+
+.logo::before {
+    content: url("../icons/camera-logo.png");
+    position: relative;
+    top: 0.625rem;
+    left: -8px;
+}
+
+.nav-btns {
+    flex-grow: 1;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    font-family: Open_Sans, sans-serif;
+}
+
+.nav-btns>* {
+    height: 5.625rem;
+    border-left: 1px solid #000;
+    flex-basis: 50%;
+}
+
+.nav-btns>:last-child {
+    border-right: 1px solid #000;
+}

@@ -1,0 +1,14 @@
+/*#### Footer ####*/
+
+.footer-container {
+    border-top: 5px solid #463ab4;
+    flex-direction: column;
+}
+
+.footer-container .logo {
+    margin: 20px 0;
+}
+
+.footer-container p {
+    margin-bottom: 20px;
+}

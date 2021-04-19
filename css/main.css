@@ -1,0 +1,29 @@
+@import url("fonts.css");
+@import url("helpers.css");
+@import url("base.css");
+@import url("header.css");
+@import url("filter.css");
+@import url("images.css");
+@import url("footer.css");
+@import url("canvas.css");
+/*#### LAYOUT ####*/
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.btn {
+    cursor: pointer;
+    background-color: #150e56;
+    color: #fff;
+}
+
+.btn:active {
+    position: relative;
+    bottom: 2px;
+}
+
+.btn:hover {
+    box-shadow: inset 2px 2px 5px 0px #000000
+}

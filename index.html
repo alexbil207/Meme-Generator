@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MemGen</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="./icons/favicon.ico" type="image/x-icon">
+    <!-- CSS -->
+    <link rel="stylesheet" href="./css/main.css">
+
+</head>
+<aside class="canvas"></aside>
+<header class="main-header">
+    <div class="main-nav container flex space-between">
+        <div class="logo align-center">Mem\Gen</div>
+        <div class="nav-btns flex space-between align-center">
+            <div class="btn gallery-btn flex justify-center align-center">Gallery</div>
+            <div class="btn my-memes-btn flex justify-center align-center">My Memes</div>
+        </div>
+    </div>
+</header>
+<section class="filter flex container align-center space-between">
+    <label class="flex" for="search"><input id="search" type="text" placeholder="Search">🔍</label>
+    <div class="filter-list flex space-between align-center"></div>
+</section>
+<main class="main-content container">
+    <div class="image-grid  grid">
+
+    </div>
+    <div class="pages flex justify-center">
+        <button class="btn prev-page">⬅</button>
+        <p class="num-pages flex align-center justify-center">0</p>
+        <button class="btn next-page">➡</button>
+    </div>
+</main>
+<footer class="footer-container flex align-center">
+    <div class="logo align-center">Mem\Gen</div>
+    <p>© 2021 MemGen.com - All Rights Reserved</p>
+</footer>
+
+
+</body>
+<script src="./js/util-service.js"></script>
+<script src="./js/image-data-service.js"></script>
+<script src="./js/storage-service.js"></script>
+<script src="./js/main-service.js"></script>
+<script src="./js/main-controller.js"></script>
+
+</html>
