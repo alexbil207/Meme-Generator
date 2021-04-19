@@ -6,6 +6,11 @@
     font-size: 1.3rem;
 }
 
+.filter input {
+    border: none;
+    border-bottom: 1px solid #000;
+}
+
 .filter-list {
     flex-grow: 2;
 }

@@ -4,6 +4,7 @@ const PAGE_SIZE = 10;
 let gPageIdx = 0;
 let isPageNav = true;
 let gImagesNum;
+
 function getFilters() {
     return filtersCollect();
 }

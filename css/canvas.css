@@ -11,3 +11,13 @@
     transition: transform .3s;
     z-index: 0;
 }
+
+.close-editor {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    font-size: 3em;
+    border: none;
+    background-color: #fff;
+    cursor: pointer;
+}

@@ -2,6 +2,9 @@
 let gFilter;
 let gInput = '';
 
+let gCanvas;
+let gCtx;
+
 window.addEventListener('load', onInit);
 
 
@@ -20,6 +23,7 @@ function addEventLiseners() {
     document.querySelector('.toggle-menu-btn').addEventListener('click', onMenuBtn);
     document.querySelector('.filter-menu-btn').addEventListener('click', onFilterMenuBtn);
     document.querySelector('input[id="search"]').addEventListener('input', onSearchInput, this);
+    document.querySelector('.close-editor').addEventListener('click', onCloseBtn, this);
     filterEvents();
     imagesEvents();
 }
@@ -137,6 +141,7 @@ function toggleMenu(currElement, textOpen, textClose, elMenu) {
 }
 
 function onSearchInput(input) {
+    console.log(input)
     if (input.data) {
         gInput += input.data;
         renderImages(gInput);
@@ -145,4 +150,13 @@ function onSearchInput(input) {
         renderImages();
     }
 
+}
+
+function onCloseBtn(element) {
+    hide(element.target.parentElement);
+}
+
+function canvasInit() {
+    gCanvas = document.getElementById('my-canvas');
+    gCtx = gCanvas.getContext('2d');
 }
