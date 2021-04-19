@@ -139,7 +139,7 @@ const gImages = [
     {
         id: makeId(),
         image: './images/image-28.jpg',
-        category: ['politics']
+        category: ['politic']
     },
     {
         id: makeId(),

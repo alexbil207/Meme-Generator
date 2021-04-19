@@ -6,19 +6,18 @@
 }
 
 .image-grid {
-    grid-template-columns: repeat(auto-fill, minmax(12.5rem, 1fr));
-    gap: .937rem;
+    grid-template-columns: repeat(auto-fill, minmax(9.375em, 1fr));
+    gap: .937em;
 }
 
 .img-preview {
     align-items: center;
     justify-items: center;
-    width: 100%;
 }
 
 .card-img {
-    width: 12.5rem;
-    height: 12.5rem;
+    width: 9.375em;
+    height: 9.375em;
     object-fit: cover;
     object-position: center;
     cursor: pointer;
@@ -43,4 +42,15 @@
 .num-pages {
     width: 5%;
     background-color: rgb(211, 208, 208);
+}
+
+@media (min-width: 390px) {
+    .image-grid {
+        grid-template-columns: repeat(auto-fill, minmax(12.5em, 1fr));
+        gap: .937em;
+    }
+    .card-img {
+        width: 12.5em;
+        height: 12.5em;
+    }
 }
