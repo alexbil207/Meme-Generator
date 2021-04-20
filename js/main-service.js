@@ -52,8 +52,8 @@ function getPageNum() {
     return gPageIdx;
 }
 
-function getImageById(imgId) {
+function getImageById(id) {
     return gImages.find(image => {
-        return image.id === imgId;
+        return image.id === id;
     });
 }

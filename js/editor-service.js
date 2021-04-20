@@ -1,31 +1,24 @@
 'use strict';
 
-let gMeme = {
-    selectedImgId: 0,
-    selectedLineIdx: 0,
-    lines:
-        [
-            {
-                txt: 'Text',
-                size: 16,
-                align: 'left',
-                color: 'black',
-                x: 0,
-                y: 0,
-            }
-        ]
+let gMemes = [];
+
+function getMemes() {
+    return gMemes;
 }
 
 
-function drawImg(elImage) {
-    let img = new Image()
-    img.src = elImage.image;
-    img.onload = () => {
-        resizeCanvas();
-        gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height)
-    }
+function createMemes(imgId) {
+    let image = getImageById(imgId, gImages);
+    gMemes.push(_createMeme(image));
 }
 
+function createLines(meme) {
+    meme.lines.push(_createLine());
+}
+
+function updateMemeText(text, meme, lineNum = 0) {
+    meme.lines[lineNum].txt = text;
+}
 
 function resizeCanvas() {
     var elWidthContainer = document.querySelector('.canvas-main');
@@ -34,3 +27,32 @@ function resizeCanvas() {
     gCanvas.height = elHeightContainer.offsetHeight;
 }
 
+function _createMeme(image) {
+    return {
+        selectedImgId: image.id,
+        selectedLineIdx: 0,
+        image: image.image,
+        lines: [_createLine()],
+    }
+}
+
+function _createLine() {
+    return {
+        txt: 'Text',
+        size: 40,
+        align: 'left',
+        color: 'white',
+        stroke: 'black',
+        font: 'Impact',
+        x: gCanvas.width / 2,
+        y: gCanvas.height / 2,
+    }
+
+}
+
+function getMameById(id) {
+    if (gMemes.length === 1) return gMemes[0];
+    return gMemes.find(meme => {
+        return meme.selectedImgId === id;
+    });
+}

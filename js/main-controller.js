@@ -4,6 +4,8 @@ let gInput = '';
 
 let gCanvas;
 let gCtx;
+let gText = [];
+
 
 window.addEventListener('load', onInit);
 
@@ -13,6 +15,8 @@ function onInit() {
     renderImages();
     onPageNumUpdate()
     addEventLiseners();
+    canvasInit();
+
 }
 
 function addEventLiseners() {
@@ -41,7 +45,7 @@ function setImagesEvents() {
 
 function setCanvasEvents() {
     document.querySelector('.control-editor-btns a').addEventListener('click', downloadImg, this);
-
+    document.querySelector('.canvas-options input').addEventListener('input', onTextInput, this);
 }
 
 function renderFilters() {
@@ -117,11 +121,13 @@ function pageCountDisplay() {
 }
 
 function onImageBtn(elImage) {
-    canvasInit();
     let imgId = elImage.target.dataset.id;
+    document.querySelector('.canvas-options input').setAttribute("data-id", imgId);
     showHidden(document.querySelector('.canvas-editor'))
-    let currImage = getImageById(imgId);
-    drawImg(currImage);
+    createMemes(imgId);
+    let meme = getMameById(imgId)
+    renderCanvas(meme);
+
 }
 
 function onMenuBtn() {
@@ -174,3 +180,46 @@ function downloadImg(elLink) {
     let imgContent = gCanvas.toDataURL('image/jpeg');
     elLink.href = imgContent;
 }
+
+function renderCanvas(image) {
+    console.log(gMemes)
+    let meme = getMameById(image.id)
+    drawImg(image);
+    drawText(meme);
+};
+
+
+function drawImg(meme) {
+    let img = new Image()
+    img.src = meme.image;
+    img.onload = () => {
+        resizeCanvas();
+        gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height)
+    }
+}
+
+function drawText(meme, lineNum = 0) {
+    var currLine = meme.lines[lineNum];
+    gCtx.lineWidth = 1;
+    gCtx.fillStyle = currLine.color;
+    gCtx.strokeStyle = currLine.stroke;
+    gCtx.font = `${currLine.size}px ${currLine.font}`;
+    gCtx.textAlign = `${currLine.align}`;
+    gCtx.fillText(currLine.txt, currLine.x, currLine.y);
+    gCtx.strokeText(currLine.txt, currLine.x, currLine.y);
+}
+
+function onTextInput(input) {
+    let memeId = document.querySelector('.canvas-options input').dataset.id;
+    let meme = getMameById(memeId);
+    gText.push(input.data);
+    if (input.data === null) {
+        console.log(gText);
+        gText.pop();
+    }
+    let txt = gText.join('');
+    updateMemeText(txt, meme);
+    drawText(meme);
+
+}
+
