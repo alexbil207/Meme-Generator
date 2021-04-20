@@ -18,6 +18,10 @@
     align-items: center;
 }
 
+.gap {
+    gap: 10px;
+}
+
 /*## grid helpers ##*/
 
 .grid {

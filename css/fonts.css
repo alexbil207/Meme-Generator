@@ -19,3 +19,13 @@
     font-family: HashedBrowns;
     src: url(../fonts/hashed-browns/HashedBrowns-WyJgn.ttf);
 }
+
+@font-face {
+    font-family: Impact;
+    src: url(../fonts/impact/impact.ttf);
+}
+
+@font-face {
+    font-family: Dancing;
+    src: url(../fonts/dancing/DancingScript-Regular.ttf);
+}

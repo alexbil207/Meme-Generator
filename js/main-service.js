@@ -51,3 +51,9 @@ function backPage() {
 function getPageNum() {
     return gPageIdx;
 }
+
+function getImageById(imgId) {
+    return gImages.find(image => {
+        return image.id === imgId;
+    });
+}

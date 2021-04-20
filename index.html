@@ -11,55 +11,98 @@
     <!-- CSS -->
     <link rel="stylesheet" href="./css/main.css">
 </head>
-<aside class="canvas-editor">
-    <div class="container">
-        <div id="canvas-main"></div>
-        <div class="canvas-options">
+
+<body>
+
+    <!-- Canvas Editor -->
+    <section class="canvas-editor">
+        <div class="editor-container flex justify-center align-center gap">
+            <div class="canvas-main">
+                <canvas id="my-canvas"></canvas>
+            </div>
+            <div class="canvas-options flex align-center">
+                <input type="text" placeholder="Enter Text Here">
+                <div class="line-options">
+                    <img class="" src="./icons/up-and-down-opposite-double-arrows-side-by-side.png" alt="Switch Lines">
+                    <img class="" src="./icons/add.png" alt="Add Line">
+                    <img class="" src="./icons/trash.png" alt="Trash">
+                </div>
+                <div class="text-dicoration grid">
+                    <img src="./icons/decrease font - icon.png" alt="decrease font">
+                    <img src="./icons/increase font - icon.png" alt="increase font">
+                    <img src="./icons/align-to-left.png" alt="align-to-left">
+                    <img src="./icons/center-text-alignment.png" alt="center-text">
+                    <img src="./icons/align-to-right.png" alt="align-to-right">
+                    <select name="font-options">
+                        <option value="Impact" selected>Default</option>
+                        <option value="Dancing">Dancing</option>
+                        <option value="HashedBrowns">HashedBrowns</option>
+                        <option value="Roboto">Roboto</option>
+                    </select>
+                    <img src="./icons/text stroke.png" alt="Text Stroke">
+                    <img src="./icons/icn-color-palette.png" alt="Text color">
+                </div>
+                <div class="control-editor-btns">
+                    <a href="#" download="exported-data.jpg">Download</a>
+                    <button class="btn save-meme">Save</button>
+                    <button class="btn share-meme">Share</button>
+                    <button class="btn close-editor">Close</button>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Saved Memes -->
+    <section class="saved-memes">
+        <button class="close-editor">X</button>
+    </section>
+
+    <!-- Header -->
+    <header class="main-header">
+        <div class="main-nav container flex space-between">
+            <div class="logo align-center">Mem\Gen</div>
+            <div class="nav-btns flex space-between align-center">
+                <div class="btn gallery-btn flex justify-center align-center">Gallery</div>
+                <div class="btn my-memes-btn flex justify-center align-center">My Memes</div>
+            </div>
+            <button class="toggle-menu-btn btn hidden">☰</button>
+        </div>
+    </header>
+
+    <!-- Filter Section -->
+    <section class="filter flex container align-center space-between">
+        <label class="flex" for="search"><input id="search" type="text" placeholder="Search"
+                list="suggestions">🔍</label>
+        <datalist id="suggestions">
+            <option value="funny">
+            <option value="sport">
+            <option value="politic">
+            <option value="movie">
+            <option value="game">
+        </datalist>
+        <div class="filter-list flex space-between align-center"></div>
+        <button class=" filter-menu-btn btn hidden">Filters</button>
+    </section>
+
+
+    <!-- Image Section -->
+    <main class="main-content container">
+        <div class="image-grid  grid">
 
         </div>
-    </div>
-    <button class="close-editor">X</button>
-</aside>
-<aside class="saved-memes">
-    <button class="close-editor">X</button>
-</aside>
-<header class="main-header">
-    <div class="main-nav container flex space-between">
+        <div class="pages flex justify-center">
+            <button class="btn prev-page">⬅</button>
+            <p class="num-pages flex align-center justify-center">0</p>
+            <button class="btn next-page">➡</button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-container flex align-center">
         <div class="logo align-center">Mem\Gen</div>
-        <div class="nav-btns flex space-between align-center">
-            <div class="btn gallery-btn flex justify-center align-center">Gallery</div>
-            <div class="btn my-memes-btn flex justify-center align-center">My Memes</div>
-        </div>
-        <button class="toggle-menu-btn btn hidden">☰</button>
-    </div>
-</header>
-<section class="filter flex container align-center space-between">
-    <label class="flex" for="search"><input id="search" type="text" placeholder="Search" list="suggestions">🔍</label>
-    <datalist id="suggestions">
-        <option value="funny">
-        <option value="sport">
-        <option value="politic">
-        <option value="movie">
-        <option value="game">
-    </datalist>
-    <div class="filter-list flex space-between align-center"></div>
-    <button class=" filter-menu-btn btn hidden">Filters</button>
-</section>
-<main class="main-content container">
-    <div class="image-grid  grid">
-
-    </div>
-    <div class="pages flex justify-center">
-        <button class="btn prev-page">⬅</button>
-        <p class="num-pages flex align-center justify-center">0</p>
-        <button class="btn next-page">➡</button>
-    </div>
-</main>
-<footer class="footer-container flex align-center">
-    <div class="logo align-center">Mem\Gen</div>
-    <p>© 2021 MemGen.com - All Rights Reserved</p>
-</footer>
-
+        <p>© 2021 MemGen.com - All Rights Reserved</p>
+    </footer>
 
 </body>
 <script src="./js/util-service.js"></script>

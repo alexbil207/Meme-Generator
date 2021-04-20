@@ -23,19 +23,25 @@ function addEventLiseners() {
     document.querySelector('.toggle-menu-btn').addEventListener('click', onMenuBtn);
     document.querySelector('.filter-menu-btn').addEventListener('click', onFilterMenuBtn);
     document.querySelector('input[id="search"]').addEventListener('input', onSearchInput, this);
-    document.querySelector('.close-editor').addEventListener('click', onCloseBtn, this);
-    filterEvents();
-    imagesEvents();
+    document.querySelector('.close-editor').addEventListener('click', onCloseEditorBtn);
+    setFilterEvents();
+    setImagesEvents();
+    setCanvasEvents();
 }
 
-function filterEvents() {
+function setFilterEvents() {
     let elFilterBtns = document.querySelectorAll('.filter-btn');
     elFilterBtns.forEach(btn => { btn.addEventListener('click', onFilerBtn, this); })
 }
 
-function imagesEvents() {
+function setImagesEvents() {
     let elImages = document.querySelectorAll('.card-img');
     elImages.forEach(image => { image.addEventListener('click', onImageBtn, this); })
+}
+
+function setCanvasEvents() {
+    document.querySelector('.control-editor-btns a').addEventListener('click', downloadImg, this);
+
 }
 
 function renderFilters() {
@@ -61,11 +67,11 @@ function renderImages(filter = 'all') {
     }).join('')
     document.querySelector('.image-grid').innerHTML = imagesStr;
     pageCountDisplay();
-    imagesEvents();
+    setImagesEvents();
 }
 
 function renderSavedMames() {
-    console.log('Saved Memes');
+    showHidden(document.querySelector('.saved-memes'));
 }
 
 function onNextPage() {
@@ -110,9 +116,12 @@ function pageCountDisplay() {
     else document.querySelector('.pages').classList.remove('hidden');
 }
 
-function onImageBtn(image) {
-    console.log(image.target.dataset.id);
+function onImageBtn(elImage) {
+    canvasInit();
+    let imgId = elImage.target.dataset.id;
     showHidden(document.querySelector('.canvas-editor'))
+    let currImage = getImageById(imgId);
+    drawImg(currImage);
 }
 
 function onMenuBtn() {
@@ -152,11 +161,17 @@ function onSearchInput(input) {
 
 }
 
-function onCloseBtn(element) {
-    hide(element.target.parentElement);
+function onCloseEditorBtn() {
+    hide(document.querySelector('.canvas-editor'));
 }
 
 function canvasInit() {
     gCanvas = document.getElementById('my-canvas');
     gCtx = gCanvas.getContext('2d');
+}
+
+function downloadImg(elLink) {
+    console.log('123')
+    let imgContent = gCanvas.toDataURL();
+    elLink.href = imgContent;
 }
