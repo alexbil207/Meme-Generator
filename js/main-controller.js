@@ -171,7 +171,6 @@ function canvasInit() {
 }
 
 function downloadImg(elLink) {
-    console.log('123')
-    let imgContent = gCanvas.toDataURL();
+    let imgContent = gCanvas.toDataURL('image/jpeg');
     elLink.href = imgContent;
 }
