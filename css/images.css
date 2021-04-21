@@ -40,6 +40,8 @@
 
 .prev-page, .next-page {
     outline: none;
+    background-color: #150e56;
+    color: #fff;
 }
 
 .num-pages {

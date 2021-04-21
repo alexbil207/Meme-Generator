@@ -21,6 +21,8 @@
 }
 
 .filter-btn {
+    background-color: #150e56;
+    color: #fff;
     margin: 0.5em 0;
     padding: 5px;
     height: 2.5rem;
