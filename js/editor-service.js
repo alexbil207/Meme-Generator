@@ -62,3 +62,16 @@ function getMameById(id) {
 function saveMeme() {
     saveToStorage(key, gMemes);
 }
+
+function addLine(meme) {
+    meme.lines.push(_createLine());
+}
+
+function nextLine(meme) {
+    meme.selectedLineIdx++;
+    if (meme.selectedLineIdx > meme.lines.length - 1) meme.selectedLineIdx = 0;
+}
+
+function removeLine(memeData) {
+    memeData.meme.lines.splice(memeData.idx, 1);
+}
