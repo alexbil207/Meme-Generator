@@ -203,7 +203,7 @@ function canvasInit() {
 
 function downloadImg(elLink) {
     elLink.target.href = gElCanvas.toDataURL();
-    elLink.target.download = "my-meme.jpg"
+    elLink.target.download = "my-meme"
 }
 
 function renderCanvas(image) {
@@ -211,20 +211,19 @@ function renderCanvas(image) {
     drawImg(image, meme);
 }
 
-
-function drawImg(image, meme) {
+function drawImg(image) {
     let img = new Image()
     img.src = image.image;
     img.onload = () => {
         resizeCanvas();
         gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
-        drawText(meme);
+        drawText();
     }
 }
 
-function drawText(meme, lineNum = 0) {
-
-    var currLine = meme.lines[lineNum];
+function drawText() {
+    let memeData = getMeme();
+    var currLine = memeData.meme.lines[memeData.idx];
     gCtx.lineWidth = 1;
     gCtx.fillStyle = currLine.color;
     gCtx.strokeStyle = currLine.stroke;

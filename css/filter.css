@@ -43,7 +43,7 @@
 
 @media (max-width: 800px) {
     .filter-menu-btn {
-        display: block;
+        display: inline-block;
     }
     .filter-list {
         flex-direction: column;
@@ -56,7 +56,7 @@
         border: 1px solid #ebebeb;
         transform: translateY(-200%);
         transition: transform .6s;
-        z-index: 0;
+        z-index: 5;
     }
     .filter-btn {
         margin: 0;

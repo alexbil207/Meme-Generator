@@ -15,13 +15,14 @@ function createMemes(imgId) {
 function createLines(meme) {
     meme.lines.push(_createLine());
 }
+
 function updateMemeText(text, meme, lineNum = 0) {
     meme.lines[lineNum].txt = text;
 }
 
 function resizeCanvas() {
-    var elWidthContainer = document.querySelector('.canvas-main');
-    var elHeightContainer = document.querySelector('.editor-container');
+    var elWidthContainer = document.querySelector('.canvas-options');
+    var elHeightContainer = document.querySelector('.canvas-options');
     gElCanvas.width = elWidthContainer.offsetWidth;
     gElCanvas.height = elHeightContainer.offsetHeight;
 }
@@ -40,7 +41,7 @@ function _createLine() {
     return {
         txt: '',
         size: 40,
-        align: 'left',
+        align: 'center',
         color: 'white',
         stroke: 'black',
         font: 'Impact',
