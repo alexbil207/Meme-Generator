@@ -69,7 +69,6 @@ function setCanvasEvents() {
 
 }
 
-
 function renderFilters() {
     let filters = getFilters();
     let filterStr = '';
@@ -199,14 +198,14 @@ function canvasInit() {
 }
 
 function downloadImg(elLink) {
-    elLink.href = gElCanvas.toDataURL();
-    elLink.download = "my-meme.jpg"
+    elLink.target.href = gElCanvas.toDataURL();
+    elLink.target.download = "my-meme.jpg"
 }
 
 function renderCanvas(image) {
     let meme = getMameById(image.id);
     drawImg(image, meme);
-};
+}
 
 
 function drawImg(image, meme) {
