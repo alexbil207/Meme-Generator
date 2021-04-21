@@ -24,7 +24,7 @@ function updateMemeText(text, meme, lineNum = 0) {
 function resizeCanvas() {
     var elWidthContainer = document.querySelector('.canvas-options');
     var elHeightContainer = document.querySelector('.canvas-options');
-    gElCanvas.width = elWidthContainer.offsetWidth;
+    gElCanvas.width = elWidthContainer.offsetWidth + 100;
     gElCanvas.height = elHeightContainer.offsetHeight;
 }
 
