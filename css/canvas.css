@@ -4,7 +4,7 @@ canvas {
     border: 1px solid #000;
 }
 
-.canvas-editor {
+.canvas-editor, .saved-memes {
     position: absolute;
     top: 0;
     left: 0;
@@ -37,8 +37,8 @@ canvas {
     cursor: pointer;
 }
 
-.line-options>* {
-    margin-inline-end: 10px;
+.line-options {
+    grid-template-columns: repeat(3, 50px);
 }
 
 .text-dicoration {
@@ -83,13 +83,7 @@ select[name="font-options"] {
     }
 }
 
-@media (min-width: 850px) {
-    .editor-container {
-        flex-direction: column;
-    }
-}
-
-@media (min-width: 1000px) {
+@media (min-width: 800px) {
     .editor-container {
         flex-direction: row;
     }

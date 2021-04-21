@@ -65,6 +65,9 @@ function setCanvasEvents() {
     document.querySelector('.down').addEventListener('click', onDown);
     document.querySelector('.left').addEventListener('click', onLeft);
     document.querySelector('.right').addEventListener('click', onRight);
+    //save
+    document.querySelector('.save-meme').addEventListener('click', onSaveClick);
+
 
 
 }
@@ -95,9 +98,6 @@ function renderImages(filter = 'all') {
     setImagesEvents();
 }
 
-function renderSavedMames() {
-    showHidden(document.querySelector('.saved-memes'));
-}
 
 function onNextPage() {
     nextPage();
@@ -117,7 +117,9 @@ function onGalleryBtn() {
 }
 
 function onMyMemes() {
-    renderSavedMames();
+    showHidden(document.querySelector('.saved-memes'));
+    document.querySelector('.filter').style.display = 'none';
+    document.querySelector('.main-content').style.display = 'none';
 }
 
 function onFilerBtn(btn) {
@@ -192,9 +194,10 @@ function onSearchInput(input) {
 
 function onCloseEditorBtn() {
     hide(document.querySelector('.canvas-editor'));
-    document.querySelector('.filter').style.display = 'block';
+    document.querySelector('.filter').style.display = 'flex';
     document.querySelector('.main-content').style.display = 'block';
 }
+
 
 function canvasInit() {
     gElCanvas = document.getElementById('my-canvas');
@@ -329,4 +332,13 @@ function onLeft() {
     memeData.meme.lines[memeData.idx].x += 5;
     renderCanvas(memeData.meme)
 
+}
+
+function onSaveClick() {
+    saveMeme();
+    let modal = document.querySelector('.canvas-options p');
+    modal.innerText = 'Saved!';
+    setTimeout(() => {
+        modal.innerText = '';
+    }, 1000);
 }

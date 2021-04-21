@@ -2,10 +2,11 @@
 
 let gMemes = [];
 
+const key = 'Memes';
+
 function getMemes() {
     return gMemes;
 }
-
 
 function createMemes(imgId) {
     let image = getImageById(imgId, gImages);
@@ -56,4 +57,8 @@ function getMameById(id) {
     return gMemes.find(meme => {
         return meme.selectedImgId === id;
     });
+}
+
+function saveMeme() {
+    saveToStorage(key, gMemes);
 }
