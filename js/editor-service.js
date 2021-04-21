@@ -22,8 +22,8 @@ function updateMemeText(text, meme, lineNum = 0) {
 function resizeCanvas() {
     var elWidthContainer = document.querySelector('.canvas-main');
     var elHeightContainer = document.querySelector('.editor-container');
-    gCanvas.width = elWidthContainer.offsetWidth;
-    gCanvas.height = elHeightContainer.offsetHeight;
+    gElCanvas.width = elWidthContainer.offsetWidth;
+    gElCanvas.height = elHeightContainer.offsetHeight;
 }
 
 function _createMeme(image) {
@@ -32,6 +32,7 @@ function _createMeme(image) {
         selectedLineIdx: 0,
         image: image.image,
         lines: [_createLine()],
+        isDragged: false
     }
 }
 
@@ -43,8 +44,8 @@ function _createLine() {
         color: 'white',
         stroke: 'black',
         font: 'Impact',
-        x: gCanvas.width / 2,
-        y: gCanvas.height / 2,
+        x: gElCanvas.width / 2,
+        y: gElCanvas.height / 2,
     }
 
 }

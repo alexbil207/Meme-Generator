@@ -3,6 +3,7 @@
 .footer-container {
     border-top: 5px solid #463ab4;
     flex-direction: column;
+    z-index: -1;
 }
 
 .footer-container .logo {

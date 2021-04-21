@@ -2,33 +2,34 @@
 
 canvas {
     border: 1px solid #000;
-    width: 300px;
-    height: 250px;
+    width: 500px;
+    height: 450px;
 }
 
 .canvas-editor, .saved-memes {
-    position: fixed;
-    top: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 100vh;
+    height: 110%;
     background-color: #fff;
     transform: translateY(-250%);
     transition: transform .5s ease-in;
-    z-index: 30;
+    z-index: 1;
 }
 
-.canvas-main {
-    padding-inline-start: 10px;
-    flex-basis: 100%;
+.editor-container {
+    padding: 50px;
 }
 
 .canvas-options {
-    background-color: #fff;
-    padding: 0;
-    height: 80vh;
-    flex-direction: column;
-    justify-content: space-around;
-    flex-basis: 100%;
+    height: 450px;
+}
+
+.canvas-options input {
+    border: none;
+    border-bottom: 1px solid #000;
+    font-size: 1.5em;
 }
 
 .line-options>*, .text-dicoration>* {
@@ -55,51 +56,25 @@ select[name="font-options"] {
 .control-editor-btns>* {
     font-size: 1.5em;
     margin-inline-end: 10px;
+    border: 2px solid black;
+    background-color: white;
+    color: black;
+    padding: 2px;
+    cursor: pointer;
+    transform: translate 0.3s, ease-in;
 }
 
-.canvas-options input {
-    font-size: 1.5em;
-    border: none;
-    border-bottom: 1px solid #000;
+.control-editor-btns>*:hover {
+    background-color: #150e56;
+    color: #fff;
 }
 
-.editor-container {
-    flex-direction: column;
-    justify-content: space-between;
-    margin-top: 20px;
+.control-editor-btns a {
+    text-decoration: none;
 }
 
-@media (min-width: 520px) {
-    canvas {
-        border: 1px solid #000;
-        width: 400px;
-        height: 350px;
-    }
-}
-
-@media (min-width: 720px) {
-    canvas {
-        border: 1px solid #000;
-        width: 400px;
-        height: 350px;
-    }
-}
-
-@media (min-width: 920px) {
-    canvas {
-        border: 1px solid #000;
-        width: 600px;
-        height: 550px;
-    }
-    .editor-container {
-        flex-direction: row;
-        justify-content: center;
-        margin-top: 10px;
-    }
-    .canvas-options input {
-        font-size: 2em;
-    }
-    .canvas-options {
-        padding: 50px 0;
-    }
+.text-move-btns>* {
+    font-size: 2em;
+    width: 50px;
+    height: 50px;
 }

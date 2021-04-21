@@ -2,7 +2,7 @@
 let gFilter;
 let gInput = '';
 
-let gCanvas;
+let gElCanvas;
 let gCtx;
 let gText = [];
 
@@ -13,9 +13,9 @@ window.addEventListener('load', onInit);
 function onInit() {
     renderFilters();
     renderImages();
+    canvasInit();
     onPageNumUpdate()
     addEventLiseners();
-    canvasInit();
 
 }
 
@@ -31,6 +31,7 @@ function addEventLiseners() {
     setFilterEvents();
     setImagesEvents();
     setCanvasEvents();
+
 }
 
 function setFilterEvents() {
@@ -48,7 +49,26 @@ function setCanvasEvents() {
     document.querySelector('.canvas-options input').addEventListener('input', onTextInput, this);
     document.querySelector('.decrease').addEventListener('click', onDecrease);
     document.querySelector('.increase').addEventListener('click', onIncrease);
+
+    //Text Align Events
+    let alignBtns = document.querySelectorAll('.align');
+    alignBtns.forEach(btn => {
+        btn.addEventListener('click', onAlignText, this);
+    })
+    // Fonts Events
+    document.querySelector('select[name="font-options"]').addEventListener('click', onFontChange, this);
+    document.querySelector('.color').addEventListener('change', onColorChange, this);
+    document.querySelector('.stroke').addEventListener('change', onStrokeChange, this);
+
+    //Movement 
+    document.querySelector('.up').addEventListener('click', onUp);
+    document.querySelector('.down').addEventListener('click', onDown);
+    document.querySelector('.left').addEventListener('click', onLeft);
+    document.querySelector('.right').addEventListener('click', onRight);
+
+
 }
+
 
 function renderFilters() {
     let filters = getFilters();
@@ -174,12 +194,12 @@ function onCloseEditorBtn() {
 }
 
 function canvasInit() {
-    gCanvas = document.getElementById('my-canvas');
-    gCtx = gCanvas.getContext('2d');
+    gElCanvas = document.getElementById('my-canvas');
+    gCtx = gElCanvas.getContext('2d');
 }
 
 function downloadImg(elLink) {
-    let imgContent = gCanvas.toDataURL('image/jpeg');
+    let imgContent = gElCanvas.toDataURL('image/jpeg');
     elLink.href = imgContent;
 }
 
@@ -194,7 +214,7 @@ function drawImg(image, meme) {
     img.src = image.image;
     img.onload = () => {
         resizeCanvas();
-        gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height)
+        gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
         drawText(meme);
     }
 }
@@ -212,30 +232,99 @@ function drawText(meme, lineNum = 0) {
 }
 
 function onTextInput(input) {
+    document.querySelector('.canvas-options input').focus();
     let memeId = document.querySelector('.canvas-options input').dataset.id;
     let meme = getMameById(memeId);
-    gText.push(input.data);
-    if (input.data === 'null') {
-        gText.pop();
-    }
-    let txt = gText.join('');
+    let txt = input.target.value;
     updateMemeText(txt, meme);
-    drawText(meme);
+    renderCanvas(meme);
 
 }
+
 function onDecrease() {
-    let memeId = document.querySelector('.canvas-options input').dataset.id;
-    let meme = getMameById(memeId);
-    let idx = meme.selectedLineIdx;
-    if (meme.lines[idx].size > 16) meme.lines[idx].size--;
-    drawText(meme, idx);
+    let memeData = getMeme();
+    if (memeData.meme.lines[memeData.idx].size > 16) memeData.meme.lines[memeData.idx].size--;
+    renderCanvas(memeData.meme);
 }
 
 function onIncrease() {
+    let memeData = getMeme();
+    let meme = memeData.meme;
+    let idx = memeData.idx;
+    if (memeData.meme.lines[memeData.idx].size < 100) memeData.meme.lines[memeData.idx].size++;
+    renderCanvas(memeData.meme);
+}
+
+function onAlignText(btn) {
+    let align = btn.target.dataset.text;
+    let memeData = getMeme();
+    memeData.meme.lines[memeData.idx].align = align;
+    renderCanvas(memeData.meme);
+}
+
+function onFontChange(font) {
+    let fontText = font.target.value;
+    let memeData = getMeme();
+    memeData.meme.lines[memeData.idx].font = fontText;
+    renderCanvas(memeData.meme);
+}
+
+function onColorChange(color) {
+    let textColor = color.target.value;
+    let memeData = getMeme();
+    memeData.meme.lines[memeData.idx].color = textColor;
+    renderCanvas(memeData.meme);
+}
+
+function onStrokeChange(color) {
+    let stroke = color.target.value;
+    let memeData = getMeme();
+    memeData.meme.lines[memeData.idx].stroke = stroke;
+    renderCanvas(memeData.meme);
+}
+
+function getMeme() {
     let memeId = document.querySelector('.canvas-options input').dataset.id;
     let meme = getMameById(memeId);
     let idx = meme.selectedLineIdx;
-    if (meme.lines[idx].size < 100) meme.lines[idx].size++;
-    console.log(meme)
-    drawText(meme, idx);
+    return {
+        idx: idx,
+        meme: meme
+    }
+}
+
+function onUp() {
+    let memeData = getMeme();
+    if (memeData.meme.lines[memeData.idx].y < (0 + memeData.meme.lines[memeData.idx].size)
+        || memeData.meme.lines[memeData.idx].y > gElCanvas.height + memeData.meme.lines[memeData.idx].size) return
+    memeData.meme.lines[memeData.idx].y -= 5;
+    renderCanvas(memeData.meme)
+
+
+}
+
+function onDown() {
+    let memeData = getMeme();
+    if (memeData.meme.lines[memeData.idx].y < (0 + memeData.meme.lines[memeData.idx].size)
+        || memeData.meme.lines[memeData.idx].y > gElCanvas.height + memeData.meme.lines[memeData.idx].size) return
+    memeData.meme.lines[memeData.idx].y += 5;
+    renderCanvas(memeData.meme)
+}
+
+function onRight() {
+    let memeData = getMeme();
+    if (memeData.meme.lines[memeData.idx].x < (0 + memeData.meme.lines[memeData.idx].size)
+        || memeData.meme.lines[memeData.idx].x > gElCanvas.width + memeData.meme.lines[memeData.idx].size) return
+    memeData.meme.lines[memeData.idx].x -= 5;
+    renderCanvas(memeData.meme)
+
+}
+
+function onLeft() {
+    let memeData = getMeme();
+    if (memeData.meme.lines[memeData.idx].x < (0 + memeData.meme.lines[memeData.idx].size)
+        || memeData.meme.lines[memeData.idx].x > gElCanvas.width + memeData.meme.lines[memeData.idx].size) return
+    memeData.meme.lines[memeData.idx].x += 5;
+    renderCanvas(memeData.meme)
+
 }

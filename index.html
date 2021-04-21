@@ -19,33 +19,42 @@
             <div class="canvas-main">
                 <canvas id="my-canvas"></canvas>
             </div>
-            <div class="canvas-options flex align-center">
+            <div class="canvas-options flex column align-center space-between">
                 <input type="text" placeholder="Enter Text Here">
+                <div class="text-move-btns">
+                    <button class="up">⬆</button>
+                    <button class="down">⬇</button>
+                    <button class="right">⬅</button>
+                    <button class="left">➡</button>
+                </div>
                 <div class="line-options">
-                    <img class="" src="./icons/up-and-down-opposite-double-arrows-side-by-side.png" alt="Switch Lines">
-                    <img class="" src="./icons/add.png" alt="Add Line">
-                    <img class="" src="./icons/trash.png" alt="Trash">
+                    <img class="change-text" src="./icons/up-and-down-opposite-double-arrows-side-by-side.png"
+                        alt="Switch Lines">
+                    <img class="add-line" src="./icons/add.png" alt="Add Line">
+                    <img class="remove-txt" src="./icons/trash.png" alt="Trash">
                 </div>
                 <div class="text-dicoration grid">
                     <img class="decrease" src="./icons/decrease font - icon.png" alt="decrease font">
                     <img class="increase" src="./icons/increase font - icon.png" alt="increase font">
-                    <img src="./icons/align-to-left.png" alt="align-to-left">
-                    <img src="./icons/center-text-alignment.png" alt="center-text">
-                    <img src="./icons/align-to-right.png" alt="align-to-right">
+                    <img class="align" src="./icons/align-to-left.png" data-text="left" alt="align-to-left">
+                    <img class="align" src="./icons/center-text-alignment.png" data-text="center" alt="center-text">
+                    <img class="align" src="./icons/align-to-right.png" data-text="right" alt="align-to-right">
                     <select name="font-options">
                         <option value="Impact" selected>Default</option>
                         <option value="Dancing">Dancing</option>
                         <option value="HashedBrowns">HashedBrowns</option>
                         <option value="Roboto">Roboto</option>
+                        <option value="Raleway">Raleway</option>
+                        <option value="Open_Sans">Open_Sans</option>
                     </select>
-                    <img src="./icons/text stroke.png" alt="Text Stroke">
-                    <img src="./icons/icn-color-palette.png" alt="Text color">
+                    <label for="text-stroke">Stroke<input class="stroke" type='color' id="text-stroke"></label>
+                    <label for=text-color"">Color<input class="color" type='color' id="text-color"></label>
                 </div>
                 <div class="control-editor-btns">
-                    <a href="#" download="exported-data.jpg">Download</a>
-                    <button class="btn save-meme">Save</button>
-                    <button class="btn share-meme">Share</button>
-                    <button class="btn close-editor">Close</button>
+                    <a href="#" class="download" download="exported-data.jpg">Download</a>
+                    <button class="save-meme">Save</button>
+                    <button class="share-meme">Share</button>
+                    <button class="close-editor">Close</button>
                 </div>
             </div>
         </div>
