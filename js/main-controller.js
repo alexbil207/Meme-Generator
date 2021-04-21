@@ -199,8 +199,8 @@ function canvasInit() {
 }
 
 function downloadImg(elLink) {
-    let imgContent = gElCanvas.toDataURL('image/jpeg');
-    elLink.href = imgContent;
+    elLink.href = gElCanvas.toDataURL();
+    elLink.download = "my-meme.jpg"
 }
 
 function renderCanvas(image) {
