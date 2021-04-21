@@ -2,28 +2,28 @@
 
 canvas {
     border: 1px solid #000;
-    width: 500px;
-    height: 450px;
+    width: 300px;
+    height: 250px;
 }
 
-.canvas-editor, .saved-memes {
+.canvas-editor {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 110%;
+    height: 100vh;
     background-color: #fff;
     transform: translateY(-250%);
-    transition: transform .5s ease-in;
     z-index: 1;
 }
 
 .editor-container {
     padding: 50px;
+    flex-direction: column;
 }
 
-.canvas-options {
-    height: 450px;
+.canvas-options>* {
+    margin-bottom: 20px;
 }
 
 .canvas-options input {
@@ -54,14 +54,14 @@ select[name="font-options"] {
 }
 
 .control-editor-btns>* {
-    font-size: 1.5em;
+    font-size: 1.3em;
     margin-inline-end: 10px;
     border: 2px solid black;
     background-color: white;
     color: black;
     padding: 2px;
     cursor: pointer;
-    transform: translate 0.3s, ease-in;
+    flex-wrap: wrap;
 }
 
 .control-editor-btns>*:hover {
@@ -77,4 +77,27 @@ select[name="font-options"] {
     font-size: 2em;
     width: 50px;
     height: 50px;
+}
+
+@media (min-width: 600px) {
+    canvas {
+        border: 1px solid #000;
+        width: 500px;
+        height: 450px;
+    }
+    .editor-container {
+        flex-direction: column;
+    }
+}
+
+@media (min-width: 850px) {
+    .editor-container {
+        flex-direction: column;
+    }
+}
+
+@media (min-width: 1000px) {
+    .editor-container {
+        flex-direction: row;
+    }
 }

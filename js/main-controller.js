@@ -144,6 +144,8 @@ function pageCountDisplay() {
 function onImageBtn(elImage) {
     let imgId = elImage.target.dataset.id;
     document.querySelector('.canvas-options input').setAttribute("data-id", imgId);
+    document.querySelector('.filter').style.display = 'none';
+    document.querySelector('.main-content').style.display = 'none';
     showHidden(document.querySelector('.canvas-editor'))
     createMemes(imgId);
     let meme = getMameById(imgId)
@@ -190,6 +192,8 @@ function onSearchInput(input) {
 
 function onCloseEditorBtn() {
     hide(document.querySelector('.canvas-editor'));
+    document.querySelector('.filter').style.display = 'block';
+    document.querySelector('.main-content').style.display = 'block';
 }
 
 function canvasInit() {
