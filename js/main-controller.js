@@ -244,7 +244,14 @@ function drawText() {
         gCtx.textAlign = `${line.align}`;
         gCtx.fillText(line.txt, line.x, line.y);
         gCtx.strokeText(line.txt, line.x, line.y);
-
+        // heighlighting the current txt
+        let idx = memeData.idx;
+        if (memeData.meme.lines[idx]) {
+            let currSize = memeData.meme.lines[idx].size;
+            let canvasWidth = gElCanvas.width;
+            gCtx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+            gCtx.fillRect(0, memeData.meme.lines[idx].y - currSize + 2, canvasWidth, currSize);
+        }
     })
 }
 
@@ -370,6 +377,7 @@ function onNextLine() {
     let memeData = getMeme();
     resetVaribles();
     nextLine(memeData.meme)
+    renderCanvas(memeData.meme);
 }
 
 function onTrash() {

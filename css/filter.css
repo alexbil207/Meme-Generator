@@ -43,6 +43,11 @@
     color: #ca5cd6;
 }
 
+.filter-menu-btn, .filter-btn {
+    background-color: #150e56;
+    color: #fff;
+}
+
 @media (max-width: 800px) {
     .filter-menu-btn {
         display: inline-block;

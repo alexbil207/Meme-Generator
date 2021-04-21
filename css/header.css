@@ -49,6 +49,11 @@
     border: none;
 }
 
+.toggle-menu-btn, .nav-btns {
+    background-color: #150e56;
+    color: #fff;
+}
+
 @media (max-width: 768px) {
     .toggle-menu-btn {
         display: block;

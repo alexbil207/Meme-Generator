@@ -33,7 +33,7 @@ function _createMeme(image) {
         selectedImgId: image.id,
         selectedLineIdx: 0,
         image: image.image,
-        lines: [_createLine()],
+        lines: [],
         isDragged: false
     }
 }
