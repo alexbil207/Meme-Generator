@@ -56,7 +56,7 @@
         border: 1px solid #ebebeb;
         transform: translateY(-200%);
         transition: transform .6s;
-        z-index: 1;
+        z-index: 0;
     }
     .filter-btn {
         margin: 0;

@@ -46,6 +46,8 @@ function setImagesEvents() {
 function setCanvasEvents() {
     document.querySelector('.control-editor-btns a').addEventListener('click', downloadImg, this);
     document.querySelector('.canvas-options input').addEventListener('input', onTextInput, this);
+    document.querySelector('.decrease').addEventListener('click', onDecrease);
+    document.querySelector('.increase').addEventListener('click', onIncrease);
 }
 
 function renderFilters() {
@@ -182,23 +184,23 @@ function downloadImg(elLink) {
 }
 
 function renderCanvas(image) {
-    console.log(gMemes)
-    let meme = getMameById(image.id)
-    drawImg(image);
-    drawText(meme);
+    let meme = getMameById(image.id);
+    drawImg(image, meme);
 };
 
 
-function drawImg(meme) {
+function drawImg(image, meme) {
     let img = new Image()
-    img.src = meme.image;
+    img.src = image.image;
     img.onload = () => {
         resizeCanvas();
         gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height)
+        drawText(meme);
     }
 }
 
 function drawText(meme, lineNum = 0) {
+
     var currLine = meme.lines[lineNum];
     gCtx.lineWidth = 1;
     gCtx.fillStyle = currLine.color;
@@ -213,8 +215,7 @@ function onTextInput(input) {
     let memeId = document.querySelector('.canvas-options input').dataset.id;
     let meme = getMameById(memeId);
     gText.push(input.data);
-    if (input.data === null) {
-        console.log(gText);
+    if (input.data === 'null') {
         gText.pop();
     }
     let txt = gText.join('');
@@ -222,4 +223,19 @@ function onTextInput(input) {
     drawText(meme);
 
 }
+function onDecrease() {
+    let memeId = document.querySelector('.canvas-options input').dataset.id;
+    let meme = getMameById(memeId);
+    let idx = meme.selectedLineIdx;
+    if (meme.lines[idx].size > 16) meme.lines[idx].size--;
+    drawText(meme, idx);
+}
 
+function onIncrease() {
+    let memeId = document.querySelector('.canvas-options input').dataset.id;
+    let meme = getMameById(memeId);
+    let idx = meme.selectedLineIdx;
+    if (meme.lines[idx].size < 100) meme.lines[idx].size++;
+    console.log(meme)
+    drawText(meme, idx);
+}

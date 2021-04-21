@@ -15,7 +15,6 @@ function createMemes(imgId) {
 function createLines(meme) {
     meme.lines.push(_createLine());
 }
-
 function updateMemeText(text, meme, lineNum = 0) {
     meme.lines[lineNum].txt = text;
 }
@@ -38,7 +37,7 @@ function _createMeme(image) {
 
 function _createLine() {
     return {
-        txt: 'Text',
+        txt: '',
         size: 40,
         align: 'left',
         color: 'white',
