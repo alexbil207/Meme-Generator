@@ -62,7 +62,7 @@
         background-color: #fff;
         border: 1px solid #ebebeb;
         transform: translateY(-200%);
-        transition: transform .6s;
+        transition: transform .3s;
         z-index: 5;
     }
     .filter-btn {

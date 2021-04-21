@@ -1,7 +1,7 @@
 'use strict';
+
 let gFilter;
 let gInput = '';
-
 let gElCanvas;
 let gCtx;
 let gText = [];
@@ -18,12 +18,12 @@ function onInit() {
     addEventLiseners();
 
 }
-
+//main Screen listeners
 function addEventLiseners() {
     document.querySelector('.prev-page').addEventListener('click', onBackPage);
     document.querySelector('.next-page').addEventListener('click', onNextPage);
     document.querySelector('.gallery-btn').addEventListener('click', onGalleryBtn);
-    document.querySelector('.my-memes-btn').addEventListener('click', onMyMemes);
+    // document.querySelector('.my-memes-btn').addEventListener('click', onMyMemes);
     document.querySelector('.toggle-menu-btn').addEventListener('click', onMenuBtn);
     document.querySelector('.filter-menu-btn').addEventListener('click', onFilterMenuBtn);
     document.querySelector('input[id="search"]').addEventListener('input', onSearchInput, this);
@@ -33,17 +33,17 @@ function addEventLiseners() {
     setCanvasEvents();
 
 }
-
+//filter listeners
 function setFilterEvents() {
     let elFilterBtns = document.querySelectorAll('.filter-btn');
-    elFilterBtns.forEach(btn => { btn.addEventListener('click', onFilerBtn, this); })
+    elFilterBtns.forEach(btn => { btn.addEventListener('click', onFilterBtn, this); })
 }
-
+//images grid listeners
 function setImagesEvents() {
     let elImages = document.querySelectorAll('.card-img');
     elImages.forEach(image => { image.addEventListener('click', onImageBtn, this); })
 }
-
+// canvas Editor Events
 function setCanvasEvents() {
     document.querySelector('.control-editor-btns a').addEventListener('click', downloadImg, this);
     document.querySelector('.canvas-options input').addEventListener('input', onTextInput, this);
@@ -57,21 +57,21 @@ function setCanvasEvents() {
         btn.addEventListener('click', onAlignText, this);
     })
     // Fonts Events
-    document.querySelector('select[name="font-options"]').addEventListener('click', onFontChange, this);
-    document.querySelector('.color').addEventListener('change', onColorChange, this);
-    document.querySelector('.stroke').addEventListener('change', onStrokeChange, this);
+    document.querySelector('select[name="font-options"]').addEventListener('click', onFontChangeBtn, this);
+    document.querySelector('.color').addEventListener('change', onColorChangeBtn, this);
+    document.querySelector('.stroke').addEventListener('change', onStrokeChangeBtn, this);
 
     //Movement 
-    document.querySelector('.up').addEventListener('click', onUp);
-    document.querySelector('.down').addEventListener('click', onDown);
-    document.querySelector('.left').addEventListener('click', onLeft);
-    document.querySelector('.right').addEventListener('click', onRight);
+    document.querySelector('.up').addEventListener('click', onUpBtn);
+    document.querySelector('.down').addEventListener('click', onDownBtn);
+    document.querySelector('.left').addEventListener('click', onLeftBtn);
+    document.querySelector('.right').addEventListener('click', onRightBtn);
     //save
-    document.querySelector('.save-meme').addEventListener('click', onSaveClick);
+    document.querySelector('.save-meme').addEventListener('click', onSaveBtn);
 
     //NEW LINE
-    document.querySelector('.add-line').addEventListener('click', onNewLine);
-    document.querySelector('.change-text').addEventListener('click', onNextLine);
+    document.querySelector('.add-line').addEventListener('click', onNewLineBtn);
+    document.querySelector('.change-text').addEventListener('click', onNextLineBtn);
     // trash
     document.querySelector('.remove-txt').addEventListener('click', onTrash);
 
@@ -80,7 +80,7 @@ function setCanvasEvents() {
 
 
 }
-
+// Filters Render
 function renderFilters() {
     let filters = getFilters();
     let filterStr = '';
@@ -91,7 +91,7 @@ function renderFilters() {
     document.querySelector('.filter-list').innerHTML = filterStr;
 
 }
-
+//Grid images render
 function renderImages(filter = 'all') {
     let images = getImages(filter);
     let imagesStr = '';
@@ -106,7 +106,6 @@ function renderImages(filter = 'all') {
     pageCountDisplay();
     setImagesEvents();
 }
-
 
 function onNextPage() {
     nextPage();
@@ -125,13 +124,8 @@ function onGalleryBtn() {
     onInit();
 }
 
-function onMyMemes() {
-    showHidden(document.querySelector('.saved-memes'));
-    document.querySelector('.filter').style.display = 'none';
-    document.querySelector('.main-content').style.display = 'none';
-}
 
-function onFilerBtn(btn) {
+function onFilterBtn(btn) {
     let elMenu = document.querySelector('.filter-list');
     let menuBtn = document.querySelector('.filter-menu-btn');
 
@@ -190,7 +184,6 @@ function toggleMenu(currElement, textOpen, textClose, elMenu) {
 }
 
 function onSearchInput(input) {
-    console.log(input)
     if (input.data) {
         gInput += input.data;
         renderImages(gInput);
@@ -286,21 +279,21 @@ function onAlignText(btn) {
     renderCanvas(memeData.meme);
 }
 
-function onFontChange(font) {
+function onFontChangeBtn(font) {
     let fontText = font.target.value;
     let memeData = getMeme();
     memeData.meme.lines[memeData.idx].font = fontText;
     renderCanvas(memeData.meme);
 }
 
-function onColorChange(color) {
+function onColorChangeBtn(color) {
     let textColor = color.target.value;
     let memeData = getMeme();
     memeData.meme.lines[memeData.idx].color = textColor;
     renderCanvas(memeData.meme);
 }
 
-function onStrokeChange(color) {
+function onStrokeChangeBtn(color) {
     let stroke = color.target.value;
     let memeData = getMeme();
     memeData.meme.lines[memeData.idx].stroke = stroke;
@@ -317,7 +310,7 @@ function getMeme() {
     }
 }
 
-function onUp() {
+function onUpBtn() {
     let memeData = getMeme();
     if (memeData.meme.lines[memeData.idx].y < (0 + memeData.meme.lines[memeData.idx].size)
         || memeData.meme.lines[memeData.idx].y > gElCanvas.height + memeData.meme.lines[memeData.idx].size) return
@@ -327,7 +320,7 @@ function onUp() {
 
 }
 
-function onDown() {
+function onDownBtn() {
     let memeData = getMeme();
     if (memeData.meme.lines[memeData.idx].y < (0 + memeData.meme.lines[memeData.idx].size)
         || memeData.meme.lines[memeData.idx].y > gElCanvas.height + memeData.meme.lines[memeData.idx].size) return
@@ -335,7 +328,7 @@ function onDown() {
     renderCanvas(memeData.meme)
 }
 
-function onRight() {
+function onRightBtn() {
     let memeData = getMeme();
     if (memeData.meme.lines[memeData.idx].x < (0 + memeData.meme.lines[memeData.idx].size)
         || memeData.meme.lines[memeData.idx].x > gElCanvas.width + memeData.meme.lines[memeData.idx].size) return
@@ -344,7 +337,7 @@ function onRight() {
 
 }
 
-function onLeft() {
+function onLeftBtn() {
     let memeData = getMeme();
     if (memeData.meme.lines[memeData.idx].x < (0 + memeData.meme.lines[memeData.idx].size)
         || memeData.meme.lines[memeData.idx].x > gElCanvas.width + memeData.meme.lines[memeData.idx].size) return
@@ -353,7 +346,7 @@ function onLeft() {
 
 }
 
-function onSaveClick() {
+function onSaveBtn() {
     saveMeme();
     let modal = document.querySelector('.canvas-options p');
     modal.innerText = 'Saved!';
@@ -366,14 +359,14 @@ function resetVaribles() {
     document.querySelector('.canvas-options input').value = '';
 }
 
-function onNewLine() {
+function onNewLineBtn() {
     let memeData = getMeme();
     addLine(memeData.meme);
     resetVaribles();
-    onNextLine();
+    onNextLineBtn();
 }
 
-function onNextLine() {
+function onNextLineBtn() {
     let memeData = getMeme();
     resetVaribles();
     nextLine(memeData.meme)
@@ -389,5 +382,12 @@ function onTrash() {
 
 function onLineCheck() {
     let memeData = getMeme();
-    if (!memeData.meme.lines.length) onNewLine();
+    if (!memeData.meme.lines.length) onNewLineBtn();
 }
+
+function onMyMemes() {
+    showHidden(document.querySelector('.saved-memes'));
+    document.querySelector('.filter').style.display = 'none';
+    document.querySelector('.main-content').style.display = 'none';
+}
+

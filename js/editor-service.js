@@ -1,8 +1,8 @@
 'use strict';
+const key = 'Memes';
 
 let gMemes = [];
 
-const key = 'Memes';
 
 function getMemes() {
     return gMemes;

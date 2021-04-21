@@ -1,0 +1,6 @@
+/*## My Memes style */
+
+.saved-memes {
+    padding: 50px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
