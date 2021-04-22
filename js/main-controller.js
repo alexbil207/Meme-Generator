@@ -33,12 +33,12 @@ function addEventLiseners() {
 }
 //filter listeners
 function setFilterEvents() {
-    let elFilterBtns = document.querySelectorAll('.filter-btn');
+    const elFilterBtns = document.querySelectorAll('.filter-btn');
     elFilterBtns.forEach(btn => { btn.addEventListener('click', onFilterBtn); })
 }
 //images grid listeners
 function setImagesEvents() {
-    let elImages = document.querySelectorAll('.card-img');
+    const elImages = document.querySelectorAll('.card-img');
     elImages.forEach(image => { image.addEventListener('click', onImageBtn); })
 }
 // canvas Editor Events
@@ -50,7 +50,7 @@ function setCanvasEvents() {
     document.querySelector('.increase').addEventListener('click', onIncrease);
 
     //Text Align Events
-    let alignBtns = document.querySelectorAll('.align');
+    const alignBtns = document.querySelectorAll('.align');
     alignBtns.forEach(btn => {
         btn.addEventListener('click', onAlignText, this);
     })
@@ -123,8 +123,8 @@ function onGalleryBtn() {
 }
 
 function onFilterBtn(ev) {
-    let elMenu = document.querySelector('.filter-list');
-    let menuBtn = document.querySelector('.filter-menu-btn');
+    const elMenu = document.querySelector('.filter-list');
+    const menuBtn = document.querySelector('.filter-menu-btn');
 
     if (elMenu.classList.value.includes('show')) toggleMenu(menuBtn, 'Filters', '✖', elMenu);
     let filter = ev.target.dataset.value;
@@ -156,14 +156,14 @@ function onImageBtn(ev) {
 }
 
 function onMenuBtn() {
-    let menuBtn = document.querySelector('.toggle-menu-btn');
-    let elMenu = document.querySelector('.nav-btns');
+    const menuBtn = document.querySelector('.toggle-menu-btn');
+    const elMenu = document.querySelector('.nav-btns');
     toggleMenu(menuBtn, '☰', '✖', elMenu)
 }
 
 function onFilterMenuBtn() {
-    let menuBtn = document.querySelector('.filter-menu-btn');
-    let elMenu = document.querySelector('.filter-list');
+    const menuBtn = document.querySelector('.filter-menu-btn');
+    const elMenu = document.querySelector('.filter-list');
     toggleMenu(menuBtn, 'Filters', '✖', elMenu)
 }
 
@@ -206,8 +206,8 @@ function canvasInit() {
 }
 
 function resizeCanvas() {
-    var elWidthContainer = document.querySelector('.canvas-options');
-    var elHeightContainer = document.querySelector('.canvas-options');
+    const elWidthContainer = document.querySelector('.canvas-options');
+    const elHeightContainer = document.querySelector('.canvas-options');
     gElCanvas.width = elWidthContainer.offsetWidth + 100;
     gElCanvas.height = elHeightContainer.offsetHeight;
 }
@@ -243,6 +243,7 @@ function drawText() {
         gCtx.strokeText(line.txt, line.x, line.y);
         // heighlighting the current txt
         let idx = memeData.idx;
+
         if (memeData.meme.lines[idx]) {
             let currSize = memeData.meme.lines[idx].size;
             let canvasWidth = gElCanvas.width;
@@ -254,7 +255,7 @@ function drawText() {
 
 function onTextInput(ev) {
     document.querySelector('.canvas-options input').focus();
-    let memeId = document.querySelector('.canvas-options input').dataset.id;
+    const memeId = document.querySelector('.canvas-options input').dataset.id;
     let meme = getMameById(memeId);
     let txt = ev.target.value;
     updateMemeText(txt, meme, meme.selectedLineIdx);
@@ -263,45 +264,43 @@ function onTextInput(ev) {
 }
 
 function onDecrease() {
-    let memeData = getMeme();
-    if (memeData.meme.lines[memeData.idx].size > 16) memeData.meme.lines[memeData.idx].size--;
-    renderCanvas(memeData.meme);
+    let { meme, idx } = getMeme();
+    if (meme.lines[idx].size > 16) meme.lines[idx].size--;
+    renderCanvas(meme);
 }
 
 function onIncrease() {
-    let memeData = getMeme();
-    let meme = memeData.meme;
-    let idx = memeData.idx;
-    if (memeData.meme.lines[memeData.idx].size < 100) memeData.meme.lines[memeData.idx].size++;
-    renderCanvas(memeData.meme);
+    let { meme, idx } = getMeme();
+    if (meme.lines[idx].size < 100) meme.lines[idx].size++;
+    renderCanvas(meme);
 }
 
 function onAlignText(ev) {
     let align = ev.target.dataset.text;
-    let memeData = getMeme();
-    memeData.meme.lines[memeData.idx].align = align;
-    renderCanvas(memeData.meme);
+    let { meme, idx } = getMeme();
+    meme.lines[idx].align = align;
+    renderCanvas(meme);
 }
 
 function onFontChangeBtn(ev) {
     let fontText = ev.target.value;
-    let memeData = getMeme();
-    memeData.meme.lines[memeData.idx].font = fontText;
-    renderCanvas(memeData.meme);
+    let { meme, idx } = getMeme();
+    meme.lines[idx].font = fontText;
+    renderCanvas(meme);
 }
 
 function onColorChangeBtn(ev) {
     let textColor = ev.target.value;
-    let memeData = getMeme();
-    memeData.meme.lines[memeData.idx].color = textColor;
-    renderCanvas(memeData.meme);
+    let { meme, idx } = getMeme();
+    meme.lines[idx].color = textColor;
+    renderCanvas(meme);
 }
 
 function onStrokeChangeBtn(ev) {
     let stroke = ev.target.value;
-    let memeData = getMeme();
-    memeData.meme.lines[memeData.idx].stroke = stroke;
-    renderCanvas(memeData.meme);
+    let { meme, idx } = getMeme();
+    meme.lines[idx].stroke = stroke;
+    renderCanvas(meme);
 }
 
 function getMeme() {
@@ -315,44 +314,44 @@ function getMeme() {
 }
 
 function onUpBtn() {
-    let memeData = getMeme();
-    if (memeData.meme.lines[memeData.idx].y < (0 + memeData.meme.lines[memeData.idx].size)
-        || memeData.meme.lines[memeData.idx].y > gElCanvas.height + memeData.meme.lines[memeData.idx].size) return
-    memeData.meme.lines[memeData.idx].y -= 5;
-    renderCanvas(memeData.meme)
+    let { meme, idx } = getMeme();
+    if (meme.lines[idx].y < (0 + meme.lines[idx].size)
+        || meme.lines[idx].y > gElCanvas.height + meme.lines[idx].size) return
+    meme.lines[idx].y -= 5;
+    renderCanvas(meme)
 
 
 }
 
 function onDownBtn() {
-    let memeData = getMeme();
-    if (memeData.meme.lines[memeData.idx].y < (0 + memeData.meme.lines[memeData.idx].size)
-        || memeData.meme.lines[memeData.idx].y > gElCanvas.height + memeData.meme.lines[memeData.idx].size) return
-    memeData.meme.lines[memeData.idx].y += 5;
-    renderCanvas(memeData.meme)
+    let { meme, idx } = getMeme();
+    if (meme.lines[idx].y < meme.lines[idx].size
+        || meme.lines[idx].y > gElCanvas.height - meme.lines[idx].size) return
+    meme.lines[idx].y += 5;
+    renderCanvas(meme)
 }
 
 function onRightBtn() {
-    let memeData = getMeme();
-    if (memeData.meme.lines[memeData.idx].x < (0 + memeData.meme.lines[memeData.idx].size)
-        || memeData.meme.lines[memeData.idx].x > gElCanvas.width + memeData.meme.lines[memeData.idx].size) return
-    memeData.meme.lines[memeData.idx].x -= 5;
-    renderCanvas(memeData.meme)
+    let { meme, idx } = getMeme();
+    if (meme.lines[idx].x < (0 + meme.lines[idx].size)
+        || meme.lines[idx].x > gElCanvas.width + meme.lines[idx].size) return
+    meme.lines[idx].x -= 5;
+    renderCanvas(meme)
 
 }
 
 function onLeftBtn() {
-    let memeData = getMeme();
-    if (memeData.meme.lines[memeData.idx].x < (0 + memeData.meme.lines[memeData.idx].size)
-        || memeData.meme.lines[memeData.idx].x > gElCanvas.width + memeData.meme.lines[memeData.idx].size) return
-    memeData.meme.lines[memeData.idx].x += 5;
-    renderCanvas(memeData.meme)
+    let { meme, idx } = getMeme();
+    if (meme.lines[idx].x < (0 + meme.lines[idx].size)
+        || meme.lines[idx].x > gElCanvas.width + meme.lines[idx].size) return
+    meme.lines[idx].x += 5;
+    renderCanvas(meme)
 
 }
 
 function onSaveBtn() {
     saveMeme();
-    let modal = document.querySelector('.canvas-options p');
+    const modal = document.querySelector('.canvas-options p');
     modal.innerText = 'Saved!';
     setTimeout(() => {
         modal.innerText = '';
@@ -364,17 +363,17 @@ function resetVaribles() {
 }
 
 function onNewLineBtn() {
-    let memeData = getMeme();
-    addLine(memeData.meme);
+    let { meme } = getMeme();
+    addLine(meme);
     resetVaribles();
     onNextLineBtn();
 }
 
 function onNextLineBtn() {
-    let memeData = getMeme();
+    let { meme } = getMeme();
     resetVaribles();
-    nextLine(memeData.meme)
-    renderCanvas(memeData.meme);
+    nextLine(meme)
+    renderCanvas(meme);
 }
 
 function onTrash() {
@@ -385,8 +384,8 @@ function onTrash() {
 }
 
 function onLineCheck() {
-    let memeData = getMeme();
-    if (!memeData.meme.lines.length) onNewLineBtn();
+    let { meme } = getMeme();
+    if (!meme.lines.length) onNewLineBtn();
 }
 
 function onMyMemes() {

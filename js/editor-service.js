@@ -17,8 +17,8 @@ function createLines(meme) {
     meme.lines.push(_createLine());
 }
 
-function updateMemeText(text, meme, lineNum = 0) {
-    meme.lines[lineNum].txt = text;
+function updateMemeText(txt, meme, lineNum = 0) {
+    meme.lines[lineNum].txt = txt;
 }
 
 function _createMeme(image) {
