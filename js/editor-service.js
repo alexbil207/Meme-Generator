@@ -21,13 +21,6 @@ function updateMemeText(text, meme, lineNum = 0) {
     meme.lines[lineNum].txt = text;
 }
 
-function resizeCanvas() {
-    var elWidthContainer = document.querySelector('.canvas-options');
-    var elHeightContainer = document.querySelector('.canvas-options');
-    gElCanvas.width = elWidthContainer.offsetWidth + 100;
-    gElCanvas.height = elHeightContainer.offsetHeight;
-}
-
 function _createMeme(image) {
     return {
         selectedImgId: image.id,

@@ -1,11 +1,9 @@
 'use strict';
 
 let gFilter;
-let gInput = '';
 let gElCanvas;
 let gCtx;
-let gText = [];
-
+let isDownload = false;
 
 window.addEventListener('load', onInit);
 
@@ -26,7 +24,7 @@ function addEventLiseners() {
     // document.querySelector('.my-memes-btn').addEventListener('click', onMyMemes);
     document.querySelector('.toggle-menu-btn').addEventListener('click', onMenuBtn);
     document.querySelector('.filter-menu-btn').addEventListener('click', onFilterMenuBtn);
-    document.querySelector('input[id="search"]').addEventListener('input', onSearchInput, this);
+    document.querySelector('input[id="search"]').addEventListener('input', onSearchInput);
     document.querySelector('.close-editor').addEventListener('click', onCloseEditorBtn);
     setFilterEvents();
     setImagesEvents();
@@ -36,17 +34,17 @@ function addEventLiseners() {
 //filter listeners
 function setFilterEvents() {
     let elFilterBtns = document.querySelectorAll('.filter-btn');
-    elFilterBtns.forEach(btn => { btn.addEventListener('click', onFilterBtn, this); })
+    elFilterBtns.forEach(btn => { btn.addEventListener('click', onFilterBtn); })
 }
 //images grid listeners
 function setImagesEvents() {
     let elImages = document.querySelectorAll('.card-img');
-    elImages.forEach(image => { image.addEventListener('click', onImageBtn, this); })
+    elImages.forEach(image => { image.addEventListener('click', onImageBtn); })
 }
 // canvas Editor Events
 function setCanvasEvents() {
-    document.querySelector('.control-editor-btns a').addEventListener('click', downloadImg, this);
-    document.querySelector('.canvas-options input').addEventListener('input', onTextInput, this);
+    document.querySelector('.control-editor-btns a').addEventListener('click', downloadImg);
+    document.querySelector('.canvas-options input').addEventListener('input', onTextInput);
     document.querySelector('.canvas-options input').addEventListener('click', onLineCheck);
     document.querySelector('.decrease').addEventListener('click', onDecrease);
     document.querySelector('.increase').addEventListener('click', onIncrease);
@@ -57,9 +55,9 @@ function setCanvasEvents() {
         btn.addEventListener('click', onAlignText, this);
     })
     // Fonts Events
-    document.querySelector('select[name="font-options"]').addEventListener('click', onFontChangeBtn, this);
-    document.querySelector('.color').addEventListener('change', onColorChangeBtn, this);
-    document.querySelector('.stroke').addEventListener('change', onStrokeChangeBtn, this);
+    document.querySelector('select[name="font-options"]').addEventListener('click', onFontChangeBtn);
+    document.querySelector('.color').addEventListener('change', onColorChangeBtn);
+    document.querySelector('.stroke').addEventListener('change', onStrokeChangeBtn);
 
     //Movement 
     document.querySelector('.up').addEventListener('click', onUpBtn);
@@ -124,13 +122,12 @@ function onGalleryBtn() {
     onInit();
 }
 
-
-function onFilterBtn(btn) {
+function onFilterBtn(ev) {
     let elMenu = document.querySelector('.filter-list');
     let menuBtn = document.querySelector('.filter-menu-btn');
 
     if (elMenu.classList.value.includes('show')) toggleMenu(menuBtn, 'Filters', '✖', elMenu);
-    let filter = btn.target.dataset.value;
+    let filter = ev.target.dataset.value;
     gFilter = filter;
     renderImages(filter)
 
@@ -146,8 +143,8 @@ function pageCountDisplay() {
     else document.querySelector('.pages').classList.remove('hidden');
 }
 
-function onImageBtn(elImage) {
-    let imgId = elImage.target.dataset.id;
+function onImageBtn(ev) {
+    let imgId = ev.target.dataset.id;
     document.querySelector('.canvas-options input').setAttribute("data-id", imgId);
     document.querySelector('.filter').style.display = 'none';
     document.querySelector('.main-content').style.display = 'none';
@@ -184,11 +181,12 @@ function toggleMenu(currElement, textOpen, textClose, elMenu) {
 }
 
 function onSearchInput(input) {
+    let textInput = ''
     if (input.data) {
-        gInput += input.data;
-        renderImages(gInput);
+        textInput += input.data;
+        renderImages(textInput);
     } else {
-        gInput = '';
+        textInput = '';
         renderImages();
     }
 
@@ -207,19 +205,25 @@ function canvasInit() {
     gCtx = gElCanvas.getContext('2d');
 }
 
-function downloadImg(elLink) {
-    elLink.target.href = gElCanvas.toDataURL();
-    elLink.target.download = "my-meme"
+function resizeCanvas() {
+    var elWidthContainer = document.querySelector('.canvas-options');
+    var elHeightContainer = document.querySelector('.canvas-options');
+    gElCanvas.width = elWidthContainer.offsetWidth + 100;
+    gElCanvas.height = elHeightContainer.offsetHeight;
 }
 
-function renderCanvas(image) {
-    let meme = getMameById(image.id);
-    drawImg(image, meme);
+function downloadImg(ev) {
+    ev.target.href = gElCanvas.toDataURL();
+    ev.target.download = "my-meme";
 }
 
-function drawImg(image) {
+function renderCanvas(meme) {
+    drawImg(meme);
+}
+
+function drawImg(meme) {
     let img = new Image()
-    img.src = image.image;
+    img.src = meme.image;
     img.onload = () => {
         resizeCanvas();
         gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
@@ -242,17 +246,17 @@ function drawText() {
         if (memeData.meme.lines[idx]) {
             let currSize = memeData.meme.lines[idx].size;
             let canvasWidth = gElCanvas.width;
-            gCtx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+            gCtx.fillStyle = 'rgba(255, 255, 255, 0.3)';
             gCtx.fillRect(0, memeData.meme.lines[idx].y - currSize + 2, canvasWidth, currSize);
         }
     })
 }
 
-function onTextInput(input) {
+function onTextInput(ev) {
     document.querySelector('.canvas-options input').focus();
     let memeId = document.querySelector('.canvas-options input').dataset.id;
     let meme = getMameById(memeId);
-    let txt = input.target.value;
+    let txt = ev.target.value;
     updateMemeText(txt, meme, meme.selectedLineIdx);
     renderCanvas(meme);
 
@@ -272,29 +276,29 @@ function onIncrease() {
     renderCanvas(memeData.meme);
 }
 
-function onAlignText(btn) {
-    let align = btn.target.dataset.text;
+function onAlignText(ev) {
+    let align = ev.target.dataset.text;
     let memeData = getMeme();
     memeData.meme.lines[memeData.idx].align = align;
     renderCanvas(memeData.meme);
 }
 
-function onFontChangeBtn(font) {
-    let fontText = font.target.value;
+function onFontChangeBtn(ev) {
+    let fontText = ev.target.value;
     let memeData = getMeme();
     memeData.meme.lines[memeData.idx].font = fontText;
     renderCanvas(memeData.meme);
 }
 
-function onColorChangeBtn(color) {
-    let textColor = color.target.value;
+function onColorChangeBtn(ev) {
+    let textColor = ev.target.value;
     let memeData = getMeme();
     memeData.meme.lines[memeData.idx].color = textColor;
     renderCanvas(memeData.meme);
 }
 
-function onStrokeChangeBtn(color) {
-    let stroke = color.target.value;
+function onStrokeChangeBtn(ev) {
+    let stroke = ev.target.value;
     let memeData = getMeme();
     memeData.meme.lines[memeData.idx].stroke = stroke;
     renderCanvas(memeData.meme);
