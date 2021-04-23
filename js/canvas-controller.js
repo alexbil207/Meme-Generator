@@ -1,7 +1,6 @@
 'use strict';
 
 
-
 // canvas Editor Events
 function setCanvasEvents() {
     document.querySelector('.control-editor-btns a').addEventListener('click', downloadImg);
@@ -33,10 +32,10 @@ function setCanvasEvents() {
     // trash
     document.querySelector('.remove-txt').addEventListener('click', onTrash);
 
-
-
-
-
+    // //Touch 
+    // document.querySelector('.canvas-editor').addEventListener('touchmove', onTouch)
+    // document.querySelector('.canvas-editor').addEventListener('touchstart', onTouch)
+    // document.querySelector('.canvas-editor').addEventListener('touchend', onTouch)
 }
 
 function canvasInit() {
