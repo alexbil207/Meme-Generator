@@ -5,7 +5,7 @@ let gMemes = [];
 
 
 function initMemes() {
-    gMemes = loadFromStorage(key);
+    if (loadFromStorage(key)) gMemes = loadFromStorage(key);
 }
 
 function createMemes(imgId) {
