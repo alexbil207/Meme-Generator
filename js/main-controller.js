@@ -213,8 +213,15 @@ function resizeCanvas() {
 }
 
 function downloadImg(ev) {
-    ev.target.href = gElCanvas.toDataURL('image/jpeg');
-    ev.target.download = "my-meme";
+    let { meme } = getMeme();
+    isDownload = true;
+    renderCanvas(meme);
+    setTimeout(() => {
+        ev.target.href = gElCanvas.toDataURL('image/jpeg');
+        ev.target.download = "my-meme";
+        isDownload = false;
+        renderCanvas(meme);
+    }, 800)
 }
 
 function renderCanvas(meme) {
@@ -233,8 +240,9 @@ function drawImg(meme) {
 }
 
 function drawText() {
-    let memeData = getMeme();
-    memeData.meme.lines.forEach(line => {
+    let { meme, idx } = getMeme();
+    let fillStyle = isDownload ? 'rgba(255, 255, 255, 0)' : 'rgba(255, 255, 255, 0.3)';
+    meme.lines.forEach(line => {
         gCtx.lineWidth = 1;
         gCtx.fillStyle = line.color;
         gCtx.strokeStyle = line.stroke;
@@ -243,13 +251,11 @@ function drawText() {
         gCtx.fillText(line.txt, line.x, line.y);
         gCtx.strokeText(line.txt, line.x, line.y);
         // heighlighting the current txt
-        let idx = memeData.idx;
-
-        if (memeData.meme.lines[idx]) {
-            let currSize = memeData.meme.lines[idx].size;
+        if (meme.lines[idx]) {
+            let currSize = meme.lines[idx].size;
             let canvasWidth = gElCanvas.width;
-            gCtx.fillStyle = 'rgba(255, 255, 255, 0.3)';
-            gCtx.fillRect(0, memeData.meme.lines[idx].y - currSize + 2, canvasWidth, currSize);
+            gCtx.fillStyle = fillStyle;
+            gCtx.fillRect(0, meme.lines[idx].y - currSize + 2, canvasWidth, currSize);
         }
     })
 }
