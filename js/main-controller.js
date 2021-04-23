@@ -208,7 +208,7 @@ function canvasInit() {
 function resizeCanvas() {
     const elWidthContainer = document.querySelector('.canvas-options');
     const elHeightContainer = document.querySelector('.canvas-options');
-    gElCanvas.width = elWidthContainer.offsetWidth + 100;
+    gElCanvas.width = elWidthContainer.offsetWidth + 150;
     gElCanvas.height = elHeightContainer.offsetHeight;
 }
 
@@ -351,11 +351,11 @@ function onLeftBtn() {
 
 function onSaveBtn() {
     saveMeme();
-    const modal = document.querySelector('.canvas-options p');
-    modal.innerText = 'Saved!';
+    const modal = document.querySelector('.save-modal');
+    modal.style.display = 'flex';
     setTimeout(() => {
-        modal.innerText = '';
-    }, 1000);
+        modal.style.display = 'none';
+    }, 800);
 }
 
 function resetVaribles() {
