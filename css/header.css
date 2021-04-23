@@ -1,12 +1,7 @@
 /*#### header ####*/
 
-.main-header {
-    border-bottom: 5px solid #463ab4;
-}
-
 .logo {
     font-family: HashedBrowns, sans-serif;
-    text-transform: uppercase;
     font-size: 2rem;
     font-weight: 400;
     flex-grow: 2;
@@ -25,8 +20,6 @@
 .nav-btns {
     flex-grow: 1;
     font-size: 1.2rem;
-    text-transform: uppercase;
-    font-family: Open_Sans, sans-serif;
 }
 
 .nav-btns>* {

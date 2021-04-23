@@ -27,7 +27,8 @@ function _createMeme(image) {
         selectedLineIdx: 0,
         image: image.image,
         lines: [],
-        isDragged: false
+        isDragged: false,
+        savedImageUrl: ''
     }
 }
 
@@ -52,7 +53,9 @@ function getMameById(id) {
     });
 }
 
-function saveMeme() {
+function saveMeme(memeImgUrl, memeId) {
+    let meme = getMameById(memeId);
+    meme.savedImageUrl = memeImgUrl;
     saveToStorage(key, gMemes);
 }
 

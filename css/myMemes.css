@@ -1,6 +1,35 @@
 /*## My Memes style */
 
-.saved-memes {
-    padding: 50px;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+.saved-memes-header h1 {
+    text-align: center;
+    font-size: 3rem;
+}
+
+.saved-memes-header h1, .saved-memes-grid {
+    width: 100vw;
+}
+
+.saved-memes-grid {
+    height: 80vh;
+    padding: 0 50px;
+}
+
+.close-myMemes {
+    width: 100px;
+    margin-bottom: 20px;
+}
+
+.my-meme-modal {
+    top: 30%;
+}
+
+.close-modal {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    font-size: 2rem;
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+    color: rgb(196, 194, 194);
 }

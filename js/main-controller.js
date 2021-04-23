@@ -21,7 +21,7 @@ function addEventLiseners() {
     document.querySelector('.prev-page').addEventListener('click', onBackPage);
     document.querySelector('.next-page').addEventListener('click', onNextPage);
     document.querySelector('.gallery-btn').addEventListener('click', onGalleryBtn);
-    // document.querySelector('.my-memes-btn').addEventListener('click', onMyMemes);
+    document.querySelector('.my-memes-btn').addEventListener('click', onMyMemes);
     document.querySelector('.toggle-menu-btn').addEventListener('click', onMenuBtn);
     document.querySelector('.filter-menu-btn').addEventListener('click', onFilterMenuBtn);
     document.querySelector('input[id="search"]').addEventListener('input', onSearchInput);
@@ -51,9 +51,8 @@ function setCanvasEvents() {
 
     //Text Align Events
     const alignBtns = document.querySelectorAll('.align');
-    alignBtns.forEach(btn => {
-        btn.addEventListener('click', onAlignText, this);
-    })
+    alignBtns.forEach(btn => { btn.addEventListener('click', onAlignText); });
+
     // Fonts Events
     document.querySelector('select[name="font-options"]').addEventListener('click', onFontChangeBtn);
     document.querySelector('.color').addEventListener('change', onColorChangeBtn);
@@ -125,7 +124,6 @@ function onGalleryBtn() {
 function onFilterBtn(ev) {
     const elMenu = document.querySelector('.filter-list');
     const menuBtn = document.querySelector('.filter-menu-btn');
-
     if (elMenu.classList.value.includes('show')) toggleMenu(menuBtn, 'Filters', '✖', elMenu);
     let filter = ev.target.dataset.value;
     gFilter = filter;
@@ -148,6 +146,7 @@ function onImageBtn(ev) {
     document.querySelector('.canvas-options input').setAttribute("data-id", imgId);
     document.querySelector('.filter').style.display = 'none';
     document.querySelector('.main-content').style.display = 'none';
+    hide(document.querySelector('.saved-memes-container'));
     showHidden(document.querySelector('.canvas-editor'))
     createMemes(imgId);
     let meme = getMameById(imgId)
@@ -213,7 +212,7 @@ function resizeCanvas() {
 }
 
 function downloadImg(ev) {
-    ev.target.href = gElCanvas.toDataURL();
+    ev.target.href = gElCanvas.toDataURL('image/jpeg');
     ev.target.download = "my-meme";
 }
 
@@ -350,12 +349,14 @@ function onLeftBtn() {
 }
 
 function onSaveBtn() {
-    saveMeme();
+    let { meme } = getMeme();
+    saveMeme(gElCanvas.toDataURL('image/jpeg'), meme.selectedImgId);
     const modal = document.querySelector('.save-modal');
     modal.style.display = 'flex';
     setTimeout(() => {
         modal.style.display = 'none';
     }, 800);
+
 }
 
 function resetVaribles() {
@@ -389,8 +390,49 @@ function onLineCheck() {
 }
 
 function onMyMemes() {
-    showHidden(document.querySelector('.saved-memes'));
+    showHidden(document.querySelector('.saved-memes-container'));
     document.querySelector('.filter').style.display = 'none';
     document.querySelector('.main-content').style.display = 'none';
+    renderSavedImages();
 }
 
+function renderSavedImages() {
+    let memesStr;
+    const savedMemes = getSavedMemes();
+    if (savedMemes) {
+        memesStr = savedMemes.map(memes => {
+            return `        
+            <div class="img-preview grid justify-center align-center" data-id="${memes.selectedImgId}">
+            <img class="card-meme" src="${memes.savedImageUrl}" data-id="${memes.selectedImgId}">
+            </div> 
+            `
+        }).join('');
+    } else {
+        memesStr = `<h2>Empty</h2>`
+    }
+    document.querySelector('.saved-memes-grid').innerHTML = memesStr;
+    setMyMemesEvents();
+
+}
+
+function setMyMemesEvents() {
+    document.querySelector('.close-myMemes').addEventListener('click', onMyMemesClose);
+    document.querySelector('.my-meme-modal').addEventListener('click', onModalClose);
+    const memeCards = document.querySelectorAll('.card-meme');
+    memeCards.forEach(meme => { meme.addEventListener('click', onMemeClick); })
+}
+
+function onMyMemesClose() {
+    hide(document.querySelector('.saved-memes-container'));
+    document.querySelector('.filter').style.display = 'flex';
+    document.querySelector('.main-content').style.display = 'block';
+}
+
+function onMemeClick(ev) {
+    document.querySelector('.my-meme-modal').style.display = 'flex';
+    console.log(ev.target.dataset.id);
+}
+
+function onModalClose() {
+    document.querySelector('.my-meme-modal').style.display = 'none';
+}

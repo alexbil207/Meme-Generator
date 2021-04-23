@@ -51,29 +51,40 @@
                     <label for="text-stroke">Stroke<input class="stroke" type='color' id="text-stroke"></label>
                     <label for=text-color"">Color<input class="color" type='color' id="text-color"></label>
                 </div>
-                <div class="control-editor-btns align-center justify-center space-between">
-                    <a href="#" class="download">Download</a>
-                    <button class="btn save-meme">Save</button>
-                    <button class="btn share-meme">Share</button>
+                <div class="control-editor-btns flex align-center">
+                    <a href="#" class="regular-btn download">Download</a>
+                    <button class="btn regular-btn save-meme">Save</button>
+                    <button class="btn regular-btn share-meme">Share</button>
                 </div>
-                <button class="btn close-editor">Close</button>
+                <button class="btn regular-btn close-editor">Close</button>
             </div>
-            <div class="save-modal flex justify-center align-center">
+            <div class="modal save-modal flex justify-center align-center">
                 <p>Saved!</p>
             </div>
         </div>
     </section>
 
     <!-- Saved Memes -->
-    <!-- <section class="saved-memes grid justify-center align-center">
-    </section> -->
+    <section class="saved-memes-container flex column space-between align-center">
+        <div class="header saved-memes-header">
+            <h1>My Memes</h1>
+        </div>
+        <div class="saved-memes-grid grid"></div>
+        <div class="modal my-meme-modal align-center justify-center gap">
+            <button class="close-modal">X</button>
+            <button class="btn regular-btn edit-btn">Edit</button>
+            <button class="btn regular-btn remove-btn">Remove</button>
+            <button class="btn regular-btn download-btn">Download</button>
+        </div>
+        <button class="btn regular-btn close-myMemes">Close</button>
+    </section>
 
     <!-- Header -->
-    <header class="main-header">
+    <header class=" header main-header">
         <div class="main-nav container flex space-between">
             <div class="logo align-center">Mem\Gen</div>
             <div class="nav-btns flex space-between align-center">
-                <div class="btn gallery-btn flex justify-center align-center">Gallery</div>
+                <div class="btn  gallery-btn flex justify-center align-center">Gallery</div>
                 <div class="btn my-memes-btn flex justify-center align-center">My Memes</div>
             </div>
             <button class="toggle-menu-btn btn hidden">☰</button>

@@ -6,7 +6,7 @@
     padding: 0;
 }
 
-header, footer {
+header, footer, .saved-memes-header h1 {
     background-color: #150e56;
     color: #fff;
     filter: saturate(1);
