@@ -14,7 +14,7 @@ function getImages(filter) {
     if (filter === 'all') {
         images = gImages.slice()
     } else {
-        images = gImages.filter(image => { return image.category.includes(filter) })
+        images = gImages.filter(image => { return image.category.includes(filter); })
     }
     isPageNav = images.length > PAGE_SIZE;
     if (isPageNav) {

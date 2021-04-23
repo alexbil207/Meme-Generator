@@ -9,6 +9,7 @@ window.addEventListener('load', onInit);
 
 
 function onInit() {
+    initMemes();
     renderFilters();
     renderImages();
     canvasInit();
@@ -195,6 +196,7 @@ function onCloseEditorBtn() {
     document.querySelector('.filter').style.display = 'flex';
     document.querySelector('.main-content').style.display = 'block';
     resetVaribles();
+    renderImages();
 
 }
 
@@ -430,10 +432,15 @@ function onMyMemesClose() {
     hide(document.querySelector('.saved-memes-container'));
     document.querySelector('.filter').style.display = 'flex';
     document.querySelector('.main-content').style.display = 'block';
+    renderImages();
 }
 
 function onMemeClick(ev) {
-    console.log(ev.target.dataset.id);
+    const memeId = ev.target.dataset.id;
+    hide(document.querySelector('.saved-memes-container'));
+    showHidden(document.querySelector('.canvas-editor'));
+    const meme = getMameById(memeId);
+    renderCanvas(meme);
 }
 
 function onRemoveMeme(ev) {

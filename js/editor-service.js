@@ -4,8 +4,8 @@ const key = 'Memes';
 let gMemes = [];
 
 
-function getMemes() {
-    return gMemes;
+function initMemes() {
+    gMemes = loadFromStorage(key);
 }
 
 function createMemes(imgId) {
