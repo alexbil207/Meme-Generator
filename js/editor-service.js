@@ -9,8 +9,10 @@ function getMemes() {
 }
 
 function createMemes(imgId) {
-    let image = getImageById(imgId, gImages);
-    gMemes.push(_createMeme(image));
+    let image = getImageById(imgId);
+    let meme = _createMeme(image)
+    gMemes.push(meme);
+    return meme.selectedImgId;
 }
 
 function createLines(meme) {
@@ -23,7 +25,7 @@ function updateMemeText(txt, meme, lineNum = 0) {
 
 function _createMeme(image) {
     return {
-        selectedImgId: image.id,
+        selectedImgId: makeId(),
         selectedLineIdx: 0,
         image: image.image,
         lines: [],

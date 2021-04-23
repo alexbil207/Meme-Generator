@@ -60,7 +60,7 @@
         width: 40%;
         border: 1px solid #ebebeb;
         transform: translateY(-200%);
-        transition: transform .6s;
+        transition: transform .3s;
     }
     .nav-btns>*:not(:last-child) {
         border-bottom: 1px solid #000;

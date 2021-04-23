@@ -51,10 +51,6 @@ select[name="font-options"] {
     grid-column: 1/span 3;
 }
 
-.control-editor-btns a {
-    text-decoration: none;
-}
-
 .control-editor-btns>*:not(:last-child) {
     margin-inline-end: 10px;
 }

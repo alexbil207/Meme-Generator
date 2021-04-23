@@ -117,7 +117,6 @@ function onBackPage() {
 }
 
 function onGalleryBtn() {
-    hide(document.querySelector('.canvas-editor'))
     onInit();
 }
 
@@ -143,13 +142,13 @@ function pageCountDisplay() {
 
 function onImageBtn(ev) {
     let imgId = ev.target.dataset.id;
-    document.querySelector('.canvas-options input').setAttribute("data-id", imgId);
     document.querySelector('.filter').style.display = 'none';
     document.querySelector('.main-content').style.display = 'none';
     hide(document.querySelector('.saved-memes-container'));
     showHidden(document.querySelector('.canvas-editor'))
-    createMemes(imgId);
-    let meme = getMameById(imgId)
+    let memeId = createMemes(imgId);
+    document.querySelector('.canvas-options input').setAttribute("data-id", memeId);
+    let meme = getMameById(memeId)
     renderCanvas(meme);
 
 }
@@ -221,6 +220,7 @@ function renderCanvas(meme) {
 }
 
 function drawImg(meme) {
+
     let img = new Image()
     img.src = meme.image;
     img.onload = () => {
@@ -402,8 +402,11 @@ function renderSavedImages() {
     if (savedMemes) {
         memesStr = savedMemes.map(memes => {
             return `        
-            <div class="img-preview grid justify-center align-center" data-id="${memes.selectedImgId}">
+            <div class="img-preview grid justify-center align-center">
             <img class="card-meme" src="${memes.savedImageUrl}" data-id="${memes.selectedImgId}">
+            <div>
+                <button class="btn regular-btn remove-saved-btn" data-id="${memes.selectedImgId}">Remove</button>
+            </div>
             </div> 
             `
         }).join('');
@@ -417,7 +420,8 @@ function renderSavedImages() {
 
 function setMyMemesEvents() {
     document.querySelector('.close-myMemes').addEventListener('click', onMyMemesClose);
-    document.querySelector('.my-meme-modal').addEventListener('click', onModalClose);
+    const removeBtns = document.querySelectorAll('.remove-saved-btn');
+    removeBtns.forEach(btn => { btn.addEventListener('click', onRemoveMeme); })
     const memeCards = document.querySelectorAll('.card-meme');
     memeCards.forEach(meme => { meme.addEventListener('click', onMemeClick); })
 }
@@ -429,10 +433,11 @@ function onMyMemesClose() {
 }
 
 function onMemeClick(ev) {
-    document.querySelector('.my-meme-modal').style.display = 'flex';
     console.log(ev.target.dataset.id);
 }
 
-function onModalClose() {
-    document.querySelector('.my-meme-modal').style.display = 'none';
+function onRemoveMeme(ev) {
+    const id = ev.target.dataset.id;
+    removeMeme(id);
+    renderSavedImages();
 }
