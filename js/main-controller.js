@@ -4,6 +4,7 @@ let gFilter;
 let gElCanvas;
 let gCtx;
 let isDownload = false;
+let gTextInput = '';
 
 window.addEventListener('load', onInit);
 
@@ -144,13 +145,13 @@ function toggleMenu(currElement, textOpen, textClose, elMenu) {
     }
 }
 
-function onSearchInput(input) {
-    let textInput = ''
-    if (input.data) {
-        textInput += input.data;
-        renderImages(textInput);
+function onSearchInput(ev) {
+    if (ev.target.value) {
+        gTextInput += ev.target.value;
+        console.log(gTextInput)
+        renderImages(gTextInput);
     } else {
-        textInput = '';
+        gTextInput = '';
         renderImages();
     }
 
