@@ -47,7 +47,7 @@ function canvasInit() {
 function resizeCanvas() {
     const elWidthContainer = document.querySelector('.canvas-options');
     const elHeightContainer = document.querySelector('.canvas-options');
-    gElCanvas.width = elWidthContainer.offsetWidth + 150;
+    gElCanvas.width = elWidthContainer.offsetWidth + 100;
     gElCanvas.height = elHeightContainer.offsetHeight;
 }
 
@@ -60,7 +60,7 @@ function downloadImg(ev) {
         ev.target.download = "my-meme";
         isDownload = false;
         renderCanvas(meme);
-    }, 800)
+    }, 500)
 }
 
 function renderCanvas(meme) {
